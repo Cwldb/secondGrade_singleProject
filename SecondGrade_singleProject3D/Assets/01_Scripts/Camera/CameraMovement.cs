@@ -8,6 +8,6 @@ public class CameraMovement : MonoBehaviour
     private void Update()
     {
         Vector3 moveDir = new Vector3(playerInput.MovementKey.x, 0, playerInput.MovementKey.y);
-        transform.position += moveDir * 5 * Time.deltaTime;
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
     }
 }
