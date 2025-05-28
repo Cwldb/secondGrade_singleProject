@@ -1,15 +1,14 @@
-using System;
 using _01_Scripts.Entities;
 using UnityEngine;
 
-namespace Blade.Players
+namespace _01_Scripts.Players
 {
     public class CharacterMovement : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
         [SerializeField] private StatSO moveSpeedStat;
         [SerializeField] private float gravity = -9.8f;
         [SerializeField] private CharacterController controller;
-        // [SerializeField] private Transform parent;
+        [SerializeField] private float rotationSpeed = 20f;
         public bool IsGround => controller.isGrounded;
         public bool CanManualMovement { get; set; } = true;
         private Vector3 _autoMovement;
@@ -22,11 +21,14 @@ namespace Blade.Players
 
         private Entity _entity;
         private EntityStat _statCompo;
+        
+        private PlayerEnemyDetect _detect;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
+            _detect = entity.GetCompo<PlayerEnemyDetect>();
         }
         
         public void SetMovementDirection(Vector2 movementInput)
@@ -45,7 +47,7 @@ namespace Blade.Players
         {
             if (CanManualMovement)
             {
-                _velocity = Quaternion.Euler(0, -45f, 0) * _movementDirection;
+                _velocity = Quaternion.Euler(0, 0, 0) * _movementDirection;
                 _velocity *= _moveSpeed * Time.fixedDeltaTime;
             }
             else
@@ -53,12 +55,24 @@ namespace Blade.Players
                 _velocity = _autoMovement * Time.fixedDeltaTime;
             }
 
-            if (_velocity.magnitude > 0)
+            if (_detect.Colliders.Length <= 0)
             {
-                Quaternion targetRot = Quaternion.LookRotation(_velocity);
-                float rotationSpeed = 20f;
-                Transform parent = _entity.transform;
-                parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
+                if (_velocity.magnitude > 0)
+                {
+                    Quaternion targetRot = Quaternion.LookRotation(_velocity);
+                    Transform parent = _entity.transform;
+                    parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
+                }
+            }
+            else
+            {
+                if (_detect.ShortEnemy != null)
+                {
+                    Vector3 targetPosition = new Vector3(_detect.ShortEnemy.transform.position.x, transform.position.y, _detect.ShortEnemy.transform.position.z);
+                    Quaternion targetRot = Quaternion.LookRotation(targetPosition - transform.position);
+                    Transform parent = _entity.transform;
+                    parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
+                }
             }
         }
 

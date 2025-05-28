@@ -1,28 +1,26 @@
-using _01_Scripts.Entities;
+﻿using _01_Scripts.Entities;
+using UnityEngine;
 
-namespace Blade.Players.States
+namespace _01_Scripts.Players.States
 {
-    public abstract class PlayerCanAttackState : PlayerState
+    public class PlayerCanAttackState : PlayerState
     {
+        private PlayerEnemyDetect _detect;
+        private Player _player;
         public PlayerCanAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
+            _detect = entity.GetCompo<PlayerEnemyDetect>();
         }
 
-        public override void Enter()
+        public override void Update()
         {
-            base.Enter();
-            _player.PlayerInput.OnAttackPressed += HandleAttackPressed;
-        }
-
-        public override void Exit()
-        {
-            _player.PlayerInput.OnAttackPressed -= HandleAttackPressed;
-            base.Exit();
-        }
-        
-        private void HandleAttackPressed()
-        {
-            _player.ChangeState("ATTACK");
+            if (_detect != null)
+            {
+                if (_detect.Colliders.Length > 0)
+                {
+                    
+                }
+            }
         }
     }
 }

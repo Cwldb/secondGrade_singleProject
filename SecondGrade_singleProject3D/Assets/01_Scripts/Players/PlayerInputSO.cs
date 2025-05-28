@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Blade.Players
+namespace _01_Scripts.Players
 {
     [CreateAssetMenu(fileName = "PlayerInput", menuName = "SO/PlayerInput", order = 0)]
     public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions

@@ -1,6 +1,6 @@
 using _01_Scripts.Entities;
 
-namespace Blade.FSM
+namespace _01_Scripts.FSM
 {
     public abstract class EntityState
     {

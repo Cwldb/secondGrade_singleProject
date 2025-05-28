@@ -1,8 +1,7 @@
 using _01_Scripts.Entities;
-using Blade.FSM;
 using UnityEngine;
 
-namespace Blade.Players.States
+namespace _01_Scripts.Players.States
 {
     public class PlayerIdleState : PlayerCanAttackState
     {
@@ -18,6 +17,11 @@ namespace Blade.Players.States
             _movement.SetMovementDirection(movementKey);
             if(movementKey.magnitude > _inputThreshold)
                 _player.ChangeState("MOVE");
+        }
+
+        private void DirectionEnemy()
+        {
+            
         }
     }
 }

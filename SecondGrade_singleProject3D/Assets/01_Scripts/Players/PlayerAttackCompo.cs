@@ -1,9 +1,8 @@
-using System;
 using _01_Scripts.Combat;
 using _01_Scripts.Entities;
 using UnityEngine;
 
-namespace Blade.Players
+namespace _01_Scripts.Players
 {
     public class PlayerAttackCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
     {

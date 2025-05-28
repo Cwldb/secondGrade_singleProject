@@ -1,10 +1,9 @@
-using System;
 using _01_Scripts.Entities;
-using Blade.FSM;
+using _01_Scripts.FSM;
 using KJYLib.Dependencies;
 using UnityEngine;
 
-namespace Blade.Players
+namespace _01_Scripts.Players
 {
     
     public class Player : Entity, IDependencyProvider
@@ -27,18 +26,6 @@ namespace Blade.Players
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
-            
-            PlayerInput.OnRollingPressed += HandleRollingKeyPressed;
-        }
-
-        private void OnDestroy()
-        {
-            PlayerInput.OnRollingPressed -= HandleRollingKeyPressed;
-        }
-
-        private void HandleRollingKeyPressed()
-        {
-            ChangeState("ROLLING");
         }
 
         protected override void Start()

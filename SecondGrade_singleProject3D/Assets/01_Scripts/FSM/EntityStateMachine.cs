@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using _01_Scripts.Entities;
 using UnityEngine;
 
-namespace Blade.FSM
+namespace _01_Scripts.FSM
 {
     public class EntityStateMachine
     {

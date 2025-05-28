@@ -1,5 +1,5 @@
 using System;
-using Blade.Players;
+using _01_Scripts.Players;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;

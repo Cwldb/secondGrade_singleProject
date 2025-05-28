@@ -1,7 +1,7 @@
 using _01_Scripts.Entities;
-using Blade.FSM;
+using _01_Scripts.FSM;
 
-namespace Blade.Players.States
+namespace _01_Scripts.Players.States
 {
     public abstract class PlayerState : EntityState
     {

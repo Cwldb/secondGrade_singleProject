@@ -1,5 +1,5 @@
 using _01_Scripts.Entities;
-using Blade.Players;
+using _01_Scripts.Players;
 using KJYLib.Dependencies;
 using UnityEngine;
 
