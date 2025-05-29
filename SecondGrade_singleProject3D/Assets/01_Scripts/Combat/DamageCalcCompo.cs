@@ -45,25 +45,5 @@ namespace _01_Scripts.Combat
 
         private void HandleCriticalChange(StatSO stat, float currentValue, float prevValue) => _critical = currentValue;
         private void HandleCriticalDamageChange(StatSO stat, float currentValue, float prevValue) => _criticalDamage = currentValue;
-
-
-        public DamageData CalculateDamage(StatSO majorStat, AttackDataSO attackData, float multiplier = 1f)
-        {
-            DamageData data = new DamageData();
-            data.damage = _statCompo.GetStat(majorStat).Value * attackData.damageMultiplier +
-                          attackData.damageIncrease * multiplier;
-
-            if (Random.value < _critical)
-            {
-                data.damage *= _criticalDamage; //ũ��Ƽ�� ������ �����ְ�
-                data.isCritical = true;
-            }
-            else
-            {
-                data.isCritical = false;
-            }
-
-            return data;
-        }
     }
 }

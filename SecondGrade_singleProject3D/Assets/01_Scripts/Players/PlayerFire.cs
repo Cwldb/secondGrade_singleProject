@@ -1,4 +1,5 @@
 ﻿using _01_Scripts.Entities;
+using _01_Scripts.Players.Bullet;
 using UnityEngine;
 
 namespace _01_Scripts.Players
@@ -14,9 +15,10 @@ namespace _01_Scripts.Players
         {
             _player = entity as Player;
         }
-        public void FireBullet()
+        public void FireBullet(float damage)
         {
-            Instantiate(bulletPrefab, _playerFire.position, Quaternion.Euler(_player.transform.rotation.eulerAngles));
+            GameObject bullet = Instantiate(bulletPrefab, _playerFire.position, Quaternion.Euler(_player.transform.rotation.eulerAngles));
+            bullet.GetComponent<BulletMove>().Damage = damage;
         }
 
         

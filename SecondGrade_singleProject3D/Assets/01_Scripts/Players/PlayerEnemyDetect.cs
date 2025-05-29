@@ -6,19 +6,19 @@ namespace _01_Scripts.Players
 {
     public class PlayerEnemyDetect : MonoBehaviour, IEntityComponent
     {
+        public StatSO atkPower, critPer, critPower;
+        
         public float radius = 0f;
         public LayerMask layer;
         public Collider[] Colliders { get; set; }
         public Collider ShortEnemy { get; set; }
 
         private Entity _entity;
-        private EntityStat _statCompo;
         private CharacterMovement _movement;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
-            _statCompo = entity.GetCompo<EntityStat>();
             _movement = entity.GetCompo<CharacterMovement>();
         }
 

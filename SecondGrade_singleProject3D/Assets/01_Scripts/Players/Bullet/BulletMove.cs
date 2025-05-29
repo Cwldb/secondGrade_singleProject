@@ -8,6 +8,8 @@ namespace _01_Scripts.Players.Bullet
     {
         [SerializeField] private LayerMask _layer;
         [SerializeField] private float speed = 15f;
+
+        public float Damage { get; set; }
         
         private void Start()
         {
@@ -27,10 +29,10 @@ namespace _01_Scripts.Players.Bullet
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.TryGetComponent(out EntityHealth health) && collision.gameObject.layer == _layer)
+            if (collision.gameObject.TryGetComponent(out EntityHealth health) || collision.gameObject.layer == _layer)
             {
                 var contact = collision.contacts[0];;
-                health.ApplyDamage(10f);
+                health.ApplyDamage(Damage);
                 Destroy(gameObject);
             }
         }

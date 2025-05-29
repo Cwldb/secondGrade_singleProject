@@ -93,7 +93,7 @@ namespace _01_Scripts.Players
             {
                 CanShoot = true;
                 Collider enemy = _detect.ShortEnemy;
-                Vector3 targetPosition = new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z);
+                Vector3 targetPosition = new Vector3(enemy.bounds.center.x, transform.position.y, enemy.bounds.center.z);
                 Quaternion targetRot = Quaternion.LookRotation(targetPosition - transform.position);
                 Transform parent = _entity.transform;
                 parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);

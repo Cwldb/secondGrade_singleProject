@@ -7,6 +7,7 @@ namespace _01_Scripts.Players.States
     {
         private PlayerEnemyDetect _detect;
         private PlayerFire _playerFire;
+        private EntityStat _stat;
         
         private float _curTime;
         private bool _isShoot;
@@ -14,7 +15,6 @@ namespace _01_Scripts.Players.States
         public PlayerCanAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
             _detect = entity.GetCompo<PlayerEnemyDetect>();
-            _movement = entity.GetCompo<CharacterMovement>();
             _playerFire = entity.GetCompo<PlayerFire>();
         }
 
@@ -33,7 +33,7 @@ namespace _01_Scripts.Players.States
                             if (!_isShoot)
                             {
                                 _isShoot = true;
-                                _playerFire.FireBullet();
+                                _playerFire.FireBullet(_detect.atkPower.Value);
                             }
                         }
 
