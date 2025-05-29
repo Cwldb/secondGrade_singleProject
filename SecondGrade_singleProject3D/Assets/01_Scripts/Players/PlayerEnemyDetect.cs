@@ -13,15 +13,19 @@ namespace _01_Scripts.Players
 
         private Entity _entity;
         private EntityStat _statCompo;
+        private CharacterMovement _movement;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
+            _movement = entity.GetCompo<CharacterMovement>();
         }
 
         private void FixedUpdate()
         {
+            if (_movement.CanShoot) return;
+            
             ShortEnemy = null;
             Colliders = Physics.OverlapSphere(transform.position, radius, layer);
 

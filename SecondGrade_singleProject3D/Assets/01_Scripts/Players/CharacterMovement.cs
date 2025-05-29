@@ -11,6 +11,7 @@ namespace _01_Scripts.Players
         [SerializeField] private float rotationSpeed = 20f;
         public bool IsGround => controller.isGrounded;
         public bool CanManualMovement { get; set; } = true;
+        public bool CanShoot { get; set; }
         private Vector3 _autoMovement;
         private float _moveSpeed = 8f;
 
@@ -55,21 +56,11 @@ namespace _01_Scripts.Players
                 _velocity = _autoMovement * Time.fixedDeltaTime;
             }
 
-            if (_detect.Colliders.Length <= 0)
+            if (!CanShoot)
             {
                 if (_velocity.magnitude > 0)
                 {
                     Quaternion targetRot = Quaternion.LookRotation(_velocity);
-                    Transform parent = _entity.transform;
-                    parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
-                }
-            }
-            else
-            {
-                if (_detect.ShortEnemy != null)
-                {
-                    Vector3 targetPosition = new Vector3(_detect.ShortEnemy.transform.position.x, transform.position.y, _detect.ShortEnemy.transform.position.z);
-                    Quaternion targetRot = Quaternion.LookRotation(targetPosition - transform.position);
                     Transform parent = _entity.transform;
                     parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
                 }
@@ -94,6 +85,19 @@ namespace _01_Scripts.Players
         public void StopImmediately()
         {
             _movementDirection = Vector3.zero;
+        }
+
+        public void RotateTarget()
+        {
+            if (_detect.ShortEnemy != null)
+            {
+                CanShoot = true;
+                Collider enemy = _detect.ShortEnemy;
+                Vector3 targetPosition = new Vector3(enemy.transform.position.x, transform.position.y, enemy.transform.position.z);
+                Quaternion targetRot = Quaternion.LookRotation(targetPosition - transform.position);
+                Transform parent = _entity.transform;
+                parent.rotation = Quaternion.Lerp(parent.rotation, targetRot, Time.fixedDeltaTime * rotationSpeed);
+            }
         }
         
         public void SetAutoMovement(Vector3 autoMovement) => _autoMovement = autoMovement;
