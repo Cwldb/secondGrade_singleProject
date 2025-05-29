@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace _01_Scripts.Combat
 {
-    public class EntityHealth : MonoBehaviour, IDamageable, IEntityComponent, IAfterInitialize
+    public class EntityHealth : MonoBehaviour,IEntityComponent, IAfterInitialize
     {
         private Entity _entity;
-        private EntityActionData _actionData;
         private EntityStat _statCompo;
 
         [SerializeField] private StatSO hpStat;
@@ -16,7 +15,6 @@ namespace _01_Scripts.Combat
         public void Initialize(Entity entity)
         {
             _entity = entity;
-            _actionData = entity.GetCompo<EntityActionData>();
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
@@ -44,12 +42,9 @@ namespace _01_Scripts.Combat
             }
         }
 
-        public void ApplyDamage(DamageData damageData, Vector3 hitPoint, Vector3 hitNormal, AttackDataSO attackData, Entity dealer)
+        public void ApplyDamage(float damage)
         {
-            _actionData.HitPoint = hitPoint;
-            _actionData.HitNormal = hitNormal;
-
-            currentHealth = Mathf.Clamp(currentHealth - damageData.damage, 0, maxHealth);
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
             if (currentHealth <= 0)
             {
                 _entity.OnDeadEvent?.Invoke();

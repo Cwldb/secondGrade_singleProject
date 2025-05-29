@@ -5,6 +5,7 @@ using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using System.Collections.Generic;
+using _01_Scripts.Enemy;
 using _01_Scripts.Entities;
 
 namespace Blade.Enemies.BT.Actions

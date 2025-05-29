@@ -2,7 +2,7 @@ using _01_Scripts.Entities;
 using Unity.Behavior;
 using UnityEngine;
 
-namespace Blade.Enemies
+namespace _01_Scripts.Enemy
 {
     public abstract class Enemy : Entity
     {

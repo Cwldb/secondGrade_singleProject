@@ -1,4 +1,5 @@
 using System;
+using _01_Scripts.Enemy;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;

@@ -7,11 +7,9 @@ namespace _01_Scripts.Players.States
     {
         private PlayerEnemyDetect _detect;
         private PlayerFire _playerFire;
-        private CharacterMovement _movement;
         
-        private float _curTime = 0;
-        private bool _isShoot = false;
-        private bool _isDetected = false;
+        private float _curTime;
+        private bool _isShoot;
         
         public PlayerCanAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
@@ -44,7 +42,6 @@ namespace _01_Scripts.Players.States
                             _movement.CanShoot = false;
                             _curTime = 0;
                             _isShoot = false;
-                            _isDetected = false;
                         }
                             
                     }

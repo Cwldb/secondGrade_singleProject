@@ -152,4 +152,4 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 64
-  speed: 20
+  speed: 30

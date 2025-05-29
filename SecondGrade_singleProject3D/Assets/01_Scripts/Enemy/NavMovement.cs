@@ -1,11 +1,10 @@
-using DG.Tweening;
-using System;
 using _01_Scripts.Combat;
 using _01_Scripts.Entities;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Blade.Enemies
+namespace _01_Scripts.Enemy
 {
     public class NavMovement : MonoBehaviour, IEntityComponent, IKnockBackable, IAfterInitialize
     {
@@ -51,12 +50,6 @@ namespace Blade.Enemies
                 LookAtTarget(agent.steeringTarget, true);
             }
         }
-
-        /// <summary>
-        /// ������ Target ��ġ�� ȸ���ϴ� �Լ�
-        /// </summary>
-        /// <param name="target"> Vector3 - �ٶ� ��ġ </param>
-        /// <param name="isSmooth"> booleam = Lerp ���뿩�� </param>
 
         public void LookAtTarget(Vector3 target, bool isSmooth = true)
         {

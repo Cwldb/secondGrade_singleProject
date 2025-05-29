@@ -1,5 +1,6 @@
 using Blade.Enemies;
 using System;
+using _01_Scripts.Enemy;
 using Unity.Behavior;
 using UnityEngine;
 
@@ -13,6 +14,6 @@ public partial class IsInAttackCondition : Condition
     public override bool IsTrue()
     {
         float distance = Vector3.Distance(Target.Value.position, Self.Value.transform.position);
-        return distance < Self.Value.attackRange; // Å½Áö °Å¸®³»¿¡ ÀÖ´Â°¡?
+        return distance < Self.Value.attackRange; // Å½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
     }
 }

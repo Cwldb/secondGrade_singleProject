@@ -1,5 +1,6 @@
 using Blade.Enemies;
 using System;
+using _01_Scripts.Enemy;
 using _01_Scripts.Entities;
 using Unity.Behavior;
 using UnityEngine;
