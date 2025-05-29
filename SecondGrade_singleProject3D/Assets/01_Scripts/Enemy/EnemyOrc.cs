@@ -1,10 +1,9 @@
-using Blade.Enemies.BT.Events;
-using System;
 using _01_Scripts.Combat;
+using Blade.Enemies.BT.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Blade.Enemies.Skeletons
+namespace _01_Scripts.Enemy
 {
     public class EnemySkeleton : Enemy, IKnockBackable
     {
