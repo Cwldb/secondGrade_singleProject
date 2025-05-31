@@ -8,6 +8,7 @@ namespace _01_Scripts.Enemy
     {
         [field : SerializeField] public EntityFinderSO PlayerFinder { get; set; }
         public BehaviorGraphAgent BtAgent { get; private set; }
+        protected Animator _animator;
 
         #region temp
 
@@ -18,8 +19,6 @@ namespace _01_Scripts.Enemy
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, detectRange);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
@@ -27,6 +26,7 @@ namespace _01_Scripts.Enemy
         protected override void AddComponents()
         {
             base.AddComponents();
+            _animator = GetComponentInChildren<Animator>();
             BtAgent = GetComponent<BehaviorGraphAgent>();
             Debug.Assert(BtAgent != null, $"{gameObject.name} don't have BehaviorGraphAgent");
         }

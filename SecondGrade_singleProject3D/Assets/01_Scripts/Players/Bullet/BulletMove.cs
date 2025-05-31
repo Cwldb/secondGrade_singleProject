@@ -31,7 +31,7 @@ namespace _01_Scripts.Players.Bullet
         {
             if (collision.gameObject.TryGetComponent(out EntityHealth health) || collision.gameObject.layer == _layer)
             {
-                var contact = collision.contacts[0];;
+                var contact = collision.contacts[0];
                 health.ApplyDamage(Damage);
                 Destroy(gameObject);
             }

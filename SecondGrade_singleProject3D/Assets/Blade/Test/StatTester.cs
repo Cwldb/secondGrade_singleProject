@@ -16,7 +16,6 @@ namespace Blade.Test
             {
                 statCompo.AddModifier(targetStat, this, modifyValue);
             }
-
             if(Keyboard.current.pKey.wasPressedThisFrame)
             {
                 statCompo.RemoveModifier(targetStat, this);
