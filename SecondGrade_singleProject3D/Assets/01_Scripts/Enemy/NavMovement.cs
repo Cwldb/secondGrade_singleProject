@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace _01_Scripts.Enemy
 {
-    public class NavMovement : MonoBehaviour, IEntityComponent, IKnockBackable, IAfterInitialize
+    public class NavMovement : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private StatSO moveSpeedStat;
@@ -67,35 +67,6 @@ namespace _01_Scripts.Enemy
         public void SetVelocity(Vector3 velocity) => agent.velocity = velocity;
         public void SetSpeed(float speed) => agent.speed = speed;
         public void SetDestination(Vector3 destination) => agent.SetDestination(destination);
-
-        public void KnockBack(Vector3 force, float time)
-        {
-            SetStop(true); // �׺���̼� ����
-            Vector3 destination = GetKnockBackEndPosition(force);
-            Vector3 delta = destination - _entity.transform.position;
-            float KnockBackDuration = delta.magnitude * time / force.magnitude;
-
-            _entity.transform.DOMove(destination, KnockBackDuration)
-                .SetEase(Ease.OutCirc)
-                .OnComplete(() =>
-                {
-                    agent.Warp(transform.position);
-                    SetStop(false);
-                });
-        }
-
-        private Vector3 GetKnockBackEndPosition(Vector3 force)
-        {
-            Vector3 startPosition = _entity.transform.position + new Vector3(0, 0.5f);
-            if(Physics.Raycast(startPosition, force.normalized, out RaycastHit hit, force.magnitude))
-            {
-                Vector3 hitPoint = hit.point;
-                hitPoint.y = _entity.transform.position.y;
-                return hitPoint;
-            }
-
-            return _entity.transform.position + force;
-        }
 
     }
 }
