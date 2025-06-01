@@ -8,6 +8,7 @@ namespace _01_Scripts.Players.States
         private PlayerEnemyDetect _detect;
         private PlayerFire _playerFire;
         private EntityStat _stat;
+        private PlayerStat _playerStat;
         
         private float _curTime;
         private bool _isShoot;
@@ -16,6 +17,7 @@ namespace _01_Scripts.Players.States
         {
             _detect = entity.GetCompo<PlayerEnemyDetect>();
             _playerFire = entity.GetCompo<PlayerFire>();
+            _playerStat = entity.GetCompo<PlayerStat>();
         }
 
         public override void Update()
@@ -23,12 +25,12 @@ namespace _01_Scripts.Players.States
             if (_detect.Colliders.Length > 0)
             {
                 _curTime += Time.deltaTime;
-                if (_curTime >= _playerFire.AttackSpeed)
+                if (_curTime >= _playerStat.AttackSpeed)
                 {
                     _movement.RotateTarget();
                     if (_movement.CanShoot)
                     {
-                        if(_curTime >= _playerFire.AttackSpeed + 0.2f)
+                        if(_curTime >= _playerStat.AttackSpeed + 0.2f)
                         {
                             if (!_isShoot)
                             {
@@ -37,7 +39,7 @@ namespace _01_Scripts.Players.States
                             }
                         }
 
-                        if (_curTime >= _playerFire.AttackSpeed + 0.4f)
+                        if (_curTime >= _playerStat.AttackSpeed + 0.4f)
                         {
                             _curTime = 0;
                             _movement.CanShoot = false;

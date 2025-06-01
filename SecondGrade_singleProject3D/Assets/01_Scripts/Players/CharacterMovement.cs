@@ -1,4 +1,5 @@
 using _01_Scripts.Entities;
+using KJYLib.StatSystem;
 using UnityEngine;
 
 namespace _01_Scripts.Players

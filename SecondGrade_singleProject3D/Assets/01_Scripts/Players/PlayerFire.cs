@@ -1,10 +1,11 @@
 ﻿using _01_Scripts.Entities;
 using _01_Scripts.Players.Bullet;
+using KJYLib.StatSystem;
 using UnityEngine;
 
 namespace _01_Scripts.Players
 {
-    public class PlayerFire : MonoBehaviour, IEntityComponent, IAfterInitialize
+    public class PlayerFire : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private Transform _playerFire;
         [SerializeField] private ParticleSystem _particle;
@@ -13,28 +14,13 @@ namespace _01_Scripts.Players
         
         private Entity _entity;
         private EntityStat _statCompo;
-
-        public float AttackSpeed;
+        private PlayerStat _playerStat;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
-        }
-        
-        public void AfterInitialize()
-        {
-            AttackSpeed = _statCompo.SubscribeStat(atkSpeedStat, HandleChangeAtkSpeed, 1);
-        }
-
-        private void HandleChangeAtkSpeed(StatSO stat, float currentValue, float prevValue)
-        {
-            AttackSpeed = prevValue;
-        }
-
-        private void OnDestroy()
-        {
-            _statCompo.UnSubscribeStat(atkSpeedStat, HandleChangeAtkSpeed);
+            _playerStat = entity.GetCompo<PlayerStat>();
         }
         
         public void FireBullet(float damage)

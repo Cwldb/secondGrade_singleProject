@@ -433,9 +433,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
-  damage: 0
-  critPer: 0
-  critPower: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1060788417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,7 +1938,6 @@ MonoBehaviour:
   _particle: {fileID: 3197311784810279267}
   bulletPrefab: {fileID: 2913601662547056907, guid: aa2fcd600ca3c1c45a3a933e164a3e28, type: 3}
   atkSpeedStat: {fileID: 11400000, guid: be4af1af3f10537408d539b0bb5aa00a, type: 2}
-  AttackSpeed: 0
 --- !u!1 &1412412627
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0830fc7d726cb4b8c67833a519281a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetStat: {fileID: 1140574467}
+  statCompos:
+  - {fileID: 11400000, guid: 8e17dd78e8b992a4b8844f7f65f71db4, type: 2}
 --- !u!1001 &1677521731
 PrefabInstance:
   m_ObjectHideFlags: 0

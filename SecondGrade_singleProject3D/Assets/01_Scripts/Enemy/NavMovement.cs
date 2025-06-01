@@ -1,6 +1,7 @@
 using _01_Scripts.Combat;
 using _01_Scripts.Entities;
 using DG.Tweening;
+using KJYLib.StatSystem;
 using UnityEngine;
 using UnityEngine.AI;
 

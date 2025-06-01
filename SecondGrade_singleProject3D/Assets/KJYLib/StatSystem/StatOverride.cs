@@ -1,4 +1,5 @@
 using System;
+using KJYLib.StatSystem;
 using UnityEngine;
 
 [Serializable]

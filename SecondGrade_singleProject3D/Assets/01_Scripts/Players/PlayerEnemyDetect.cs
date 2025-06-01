@@ -1,11 +1,12 @@
 ﻿using System;
 using _01_Scripts.Entities;
+using KJYLib.StatSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _01_Scripts.Players
 {
-    public class PlayerEnemyDetect : MonoBehaviour, IEntityComponent, IAfterInitialize
+    public class PlayerEnemyDetect : MonoBehaviour, IEntityComponent
     {
         public StatSO atkPowerStat, critPowerStat, critPerStat;
         
@@ -17,53 +18,22 @@ namespace _01_Scripts.Players
         private Entity _entity;
         private EntityStat _statCompo;
         private CharacterMovement _movement;
-
-        public float damage;
-        public float critPer;
-        public float critPower;
+        private PlayerStat _playerStat;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
             _movement = entity.GetCompo<CharacterMovement>();
+            _playerStat = entity.GetCompo<PlayerStat>();
         }
-
-        public void AfterInitialize()
-        {
-            damage = _statCompo.SubscribeStat(atkPowerStat, HandleDamage, 5);
-            critPer = _statCompo.SubscribeStat(critPerStat, HandleCritPer, 0);
-            critPower = _statCompo.SubscribeStat(critPowerStat, HandleCritPower, 1);
-        }
-
-        private void HandleCritPer(StatSO stat, float currentValue, float prevValue)
-        {
-            critPer = prevValue;
-        }
-
-        private void HandleCritPower(StatSO stat, float currentValue, float prevValue)
-        {
-            critPower = prevValue;
-        }
-
-        private void HandleDamage(StatSO stat, float currentValue, float prevValue)
-        {
-            damage = currentValue + prevValue;
-        }
-
-        private void OnDestroy()
-        {
-            _statCompo.UnSubscribeStat(atkPowerStat, HandleDamage);
-            _statCompo.UnSubscribeStat(critPerStat, HandleCritPer);
-            _statCompo.UnSubscribeStat(critPowerStat, HandleCritPower);
-        }
-
+        
         public float DamageCalc()
         {
-            float dmg = damage;
-            if (Random.value < critPer)
+            float dmg = _playerStat.Damage;
+            if (Random.value < _playerStat.CritPer)
             {
-                return dmg *= critPower;
+                return dmg *= _playerStat.CritPower;
             }
             
             return dmg;
