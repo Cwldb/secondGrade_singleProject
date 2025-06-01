@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace _01_Scripts.Core
@@ -7,13 +6,14 @@ namespace _01_Scripts.Core
     public class GameManager : MonoSingleton<GameManager>
     {
         public event Action HandleChangeEnemyCount;
+        public Action OnLevelUp;
 
         [SerializeField] private int startLevelCount;
+        
         private int _enemyCount;
 
         private void Start()
         {
-            HandleChangeEnemyCount += AddEnemyCount;
         }
 
         public void AddEnemyCount()
@@ -21,10 +21,10 @@ namespace _01_Scripts.Core
             _enemyCount++;
             if (_enemyCount == startLevelCount)
             {
+                Debug.Log("asdasd");
+                OnLevelUp?.Invoke();
                 startLevelCount+=2;
-                
             }
-            HandleChangeEnemyCount?.Invoke();
         }
     }
 }

@@ -1,11 +1,12 @@
 using _01_Scripts.Combat;
+using _01_Scripts.Core;
 using Blade.Enemies.BT.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace _01_Scripts.Enemy
 {
-    public class EnemyOrc : Enemy, IKnockBackable
+    public class EnemyRobber : Enemy, IKnockBackable
     {
         public UnityEvent<Vector3, float> OnKnockBackInvoke;
         private StateChange _stateChannel;
@@ -21,6 +22,7 @@ namespace _01_Scripts.Enemy
         {
             if (IsDead) return;
             IsDead = true;
+            GameManager.Instance.AddEnemyCount();
             _stateChannel.SendEventMessage(EnemyState.DEAD);
         }
         

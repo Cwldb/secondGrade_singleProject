@@ -15,16 +15,12 @@ namespace Blade.Test
         {
             if (Keyboard.current.oKey.wasPressedThisFrame)
             {
-                StatSO stat = statCompo.GetStat(targetStat);
-                if (stat != null)
-                {
-                    stat.BaseValue = modifyValue;
-                    Debug.Log($"Stat 이름: {stat.statName}, 현재 값: {stat.BaseValue}");
-                }
+                statCompo.AddModifier(targetStat, this, modifyValue);
             }
+            
             if(Keyboard.current.pKey.wasPressedThisFrame)
             {
-                //statCompo.RemoveModifier(targetStat, this);
+                statCompo.RemoveModifier(targetStat, this);
             }
         }
     }

@@ -25,7 +25,6 @@ namespace _01_Scripts.Players
         
         public void FireBullet(float damage)
         {
-            Debug.Log(damage);
             GameObject bullet = Instantiate(bulletPrefab, _playerFire.position, Quaternion.Euler(_entity.transform.rotation.eulerAngles));
             _particle.Play();
             bullet.GetComponent<BulletMove>().Damage = damage;

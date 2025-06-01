@@ -9,8 +9,8 @@ namespace _01_Scripts.Players
     public class PlayerStat : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
         public StatSO atkPowerStat, critPowerStat, critPerStat, atkSpeedStat;
-        
-        public float Damage { get; set; }
+
+        public float Damage;
         public float CritPer { get; set; }
         public float CritPower { get; set; }
         public float AttackSpeed { get; set; }
@@ -37,6 +37,7 @@ namespace _01_Scripts.Players
             _statCompo.UnSubscribeStat(atkPowerStat, HandleDamage);
             _statCompo.UnSubscribeStat(critPerStat, HandleCritPer);
             _statCompo.UnSubscribeStat(critPowerStat, HandleCritPower);
+            _statCompo.UnSubscribeStat(atkSpeedStat, HandleAtkSpeed);
         }
 
         private void HandleCritPer(StatSO stat, float currentValue, float prevValue)

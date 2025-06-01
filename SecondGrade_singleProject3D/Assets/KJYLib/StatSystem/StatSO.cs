@@ -2,6 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatType
+{
+    ATTACK_POWER,
+    CRITICAL_PERCENT,
+    CRITICAL_POWER,
+    ATTTACK_SPEED
+}
+
 namespace KJYLib.StatSystem
 {
     [CreateAssetMenu(fileName = "StatSO", menuName = "StatSystem/StatSO", order = 0)]
@@ -21,6 +29,9 @@ namespace KJYLib.StatSystem
         [field: SerializeField] public bool IsPercent { get; private set; }
 
         private float _modifiedValue = 0;
+        
+        public StatType statType;
+        
         public Sprite Icon => icon;
 
         public float MaxValue
