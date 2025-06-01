@@ -1,18 +1,30 @@
 using System;
-using _01_Scripts.Players;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _01_Scripts.Core
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        [SerializeField] private PlayerEnemyDetect detect;
+        public event Action HandleChangeEnemyCount;
 
-        private void Update()
+        [SerializeField] private int startLevelCount;
+        private int _enemyCount;
+
+        private void Start()
         {
-            if (Keyboard.current.digit1Key.wasPressedThisFrame)
-                detect.damage += 10;
+            HandleChangeEnemyCount += AddEnemyCount;
+        }
+
+        public void AddEnemyCount()
+        {
+            _enemyCount++;
+            if (_enemyCount == startLevelCount)
+            {
+                startLevelCount+=2;
+                
+            }
+            HandleChangeEnemyCount?.Invoke();
         }
     }
 }
