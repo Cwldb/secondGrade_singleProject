@@ -11,10 +11,7 @@ namespace _01_Scripts.Enemy
         protected Animator _animator;
 
         #region temp
-
-        public float detectRange = 8f;
         public float attackRange = 2f;
-
         #endregion
 
         private void OnDrawGizmosSelected()

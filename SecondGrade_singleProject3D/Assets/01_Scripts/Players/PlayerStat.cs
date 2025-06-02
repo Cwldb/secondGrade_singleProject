@@ -10,7 +10,7 @@ namespace _01_Scripts.Players
     {
         public StatSO atkPowerStat, critPowerStat, critPerStat, atkSpeedStat;
 
-        public float Damage;
+        public float Damage { get; set; }
         public float CritPer { get; set; }
         public float CritPower { get; set; }
         public float AttackSpeed { get; set; }

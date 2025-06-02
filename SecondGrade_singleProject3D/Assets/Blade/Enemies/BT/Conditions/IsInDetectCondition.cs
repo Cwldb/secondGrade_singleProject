@@ -15,8 +15,7 @@ namespace Blade.Enemies.BT.Conditions
 
         public override bool IsTrue()
         {
-            float distance = Vector3.Distance(Target.Value.position, Self.Value.transform.position);
-            return distance < Self.Value.detectRange; // Ž�� �Ÿ����� �ִ°�?
+            return true;
         }
     }
 }

@@ -1,13 +1,14 @@
 using System;
+using _01_Scripts.Entities;
 using UnityEngine;
 
 namespace _01_Scripts.Core
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        public event Action HandleChangeEnemyCount;
         public Action OnLevelUp;
 
+        [field : SerializeField] public EntityFinderSO PlayerFinder { get; set; }
         [SerializeField] private int startLevelCount;
         
         private int _enemyCount;
@@ -20,8 +21,7 @@ namespace _01_Scripts.Core
         {
             _enemyCount++;
             if (_enemyCount == startLevelCount)
-            {
-                Debug.Log("asdasd");
+            {   
                 OnLevelUp?.Invoke();
                 startLevelCount+=2;
             }
