@@ -1,6 +1,7 @@
 using _01_Scripts.Entities;
 using _01_Scripts.FSM;
 using KJYLib.Dependencies;
+using System;
 using UnityEngine;
 
 namespace _01_Scripts.Players
@@ -32,6 +33,13 @@ namespace _01_Scripts.Players
         {
             base.Start();
             _stateMachine.ChangeState("IDLE");
+            OnDeadEvent.AddListener(HandleDeadEvent);
+        }
+
+        private void HandleDeadEvent()
+        {
+            _stateMachine.ChangeState("DEAD");
+            PlayerInput.OnDisable();
         }
 
         private void Update()

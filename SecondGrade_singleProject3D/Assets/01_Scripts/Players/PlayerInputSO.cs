@@ -18,7 +18,7 @@ namespace _01_Scripts.Players
         private Vector2 _screenPosition; //마우스 좌표
         private Vector3 _worldPosition;
         
-        private void OnEnable()
+        public void OnEnable()
         {
             if (_controls == null)
             {
@@ -28,7 +28,7 @@ namespace _01_Scripts.Players
             _controls.Player.Enable();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             _controls.Player.Disable();
         }
