@@ -7,5 +7,12 @@ namespace _01_Scripts.Players.States
         public PlayerDeadState(Entity entity, int animationHash) : base(entity, animationHash)
         {
         }
+
+        public override void Enter()
+        {
+            base.Enter();
+            _movement.CanManualMovement = false;
+            _player.ChangeState("DEAD");
+        }
     }
 }

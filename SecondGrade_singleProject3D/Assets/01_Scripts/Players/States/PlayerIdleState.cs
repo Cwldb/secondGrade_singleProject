@@ -18,10 +18,5 @@ namespace _01_Scripts.Players.States
             if(movementKey.magnitude > _inputThreshold)
                 _player.ChangeState("MOVE");
         }
-
-        private void DirectionEnemy()
-        {
-            
-        }
     }
 }

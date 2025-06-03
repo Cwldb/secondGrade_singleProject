@@ -1,4 +1,5 @@
-﻿using _01_Scripts.Entities;
+﻿using _01_Scripts.CameraScript;
+using _01_Scripts.Entities;
 using _01_Scripts.Players.Bullet;
 using KJYLib.StatSystem;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace _01_Scripts.Players
             GameObject bullet = Instantiate(bulletPrefab, _playerFire.position, Quaternion.Euler(_entity.transform.rotation.eulerAngles));
             _particle.Play();
             bullet.GetComponent<BulletMove>().Damage = damage;
+            CameraShake.Instance.Shake();
         }
     }
 }
