@@ -1,41 +1,32 @@
 ﻿using System.Collections;
 using _01_Scripts.Core;
 using UnityEngine;
+using DG.Tweening;
+using Unity.Cinemachine;
 
 namespace _01_Scripts.CameraScript
 {
     public class CameraShake : MonoSingleton<CameraShake>
     {
-        private Vector3 originalPos;
-        private Coroutine currentShake;
+        private CinemachineBasicMultiChannelPerlin virtualCamera;
 
-        public void Shake(float duration = 0.2f, float magnitude = 0.3f)
+        private void Start()
         {
-            if (currentShake != null)
-                StopCoroutine(currentShake);
-
-            currentShake = StartCoroutine(ShakeCoroutine(duration, magnitude));
+            virtualCamera = GetComponent<CinemachineBasicMultiChannelPerlin>();
         }
 
-        private IEnumerator ShakeCoroutine(float duration, float magnitude)
+        public void Shake()
         {
-            Transform camTransform = Camera.main.transform;
-            originalPos = camTransform.position;
+            virtualCamera.AmplitudeGain = 3;
+            virtualCamera.FrequencyGain = 3;
+            StartCoroutine(EndShake());
+        }
 
-            float elapsed = 0f;
-
-            while (elapsed < duration)
-            {
-                float offsetX = Random.Range(-1f, 1f) * magnitude;
-                float offsetY = Random.Range(-1f, 1f) * magnitude;
-
-                camTransform.position = originalPos + new Vector3(offsetX, offsetY, 0f);
-
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            camTransform.position = originalPos;
+        private IEnumerator EndShake()
+        {
+            yield return new WaitForSeconds(0.1f);
+            virtualCamera.AmplitudeGain = 0;
+            virtualCamera.FrequencyGain = 0;
         }
     }
 }

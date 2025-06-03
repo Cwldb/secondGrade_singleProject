@@ -1,3 +1,4 @@
+using System.Collections;
 using _01_Scripts.Combat;
 using _01_Scripts.Core;
 using _01_Scripts.Entities;
@@ -31,8 +32,15 @@ namespace _01_Scripts.Enemy
         {
             if (IsDead) return;
             IsDead = true;
-            GameManager.Instance.AddEnemyCount();
+            StartCoroutine(EnemyDying());
+            
             _stateChannel.SendEventMessage(EnemyState.DEAD);
+        }
+
+        private IEnumerator EnemyDying()
+        {
+            yield return new WaitForSeconds(4);
+            GameManager.Instance.AddEnemyCount();
         }
 
         private void HandleAttackEvent()
