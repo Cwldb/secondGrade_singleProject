@@ -19,8 +19,8 @@ namespace _01_Scripts.Spawner
 
         private IEnumerator SpawnEnemy()
         {
-            yield return new WaitForSeconds(2);
             Instantiate(Enemy1Prefab, enemySpawnPos[Random.Range(0, 4)].position, Quaternion.identity);
+            yield return new WaitForSeconds(4);
             StartCoroutine(SpawnEnemy());
         }
     }

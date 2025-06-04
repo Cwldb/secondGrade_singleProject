@@ -45,13 +45,16 @@ namespace _01_Scripts.Players.States
         {
             if (!_movement.CanShoot) return;
 
-            if (!_hasFired && _curTime >= _playerStat.AttackSpeed + FireDelay)
+            float fireTime = _playerStat.AttackSpeed + FireDelay;
+            float resetTime = _playerStat.AttackSpeed + ResetDelay;
+
+            if (!_hasFired && _curTime >= fireTime && _curTime < resetTime)
             {
                 _playerFire.FireBullet(_detect.DamageCalc());
                 _hasFired = true;
             }
 
-            if (_curTime >= _playerStat.AttackSpeed + ResetDelay)
+            if (_curTime >= resetTime)
             {
                 _curTime = 0;
                 _movement.CanShoot = false;
