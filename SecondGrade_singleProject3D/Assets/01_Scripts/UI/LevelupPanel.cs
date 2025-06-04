@@ -14,6 +14,7 @@ namespace _01_Scripts.UI
     public class LevelupPanel : MonoBehaviour
     {
         [SerializeField] private GameObject selects;
+        [SerializeField] private TMP_Text levelText;
         
         private PlayerStat _playerStat;
         
@@ -23,6 +24,7 @@ namespace _01_Scripts.UI
         private void Start()
         {
             GameManager.Instance.OnLevelUp += EnablePanels;
+            GameManager.Instance.OnEnemyCount += LevelUpText;
             
             _playerStat = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerStat>();
             
@@ -31,15 +33,27 @@ namespace _01_Scripts.UI
                 { "Damage", () => _playerStat.Damage += 1f },
                 { "CritPer", () => _playerStat.CritPer += 0.05f },
                 { "CritPower", () => _playerStat.CritPower += 0.1f },
-                { "AttackSpeed", () => _playerStat.AttackSpeed += -0.1f }
+                { "AttackSpeed", () => _playerStat.AttackSpeed += -0.1f },
+                { "Health", () =>
+                    {
+                        _playerStat._healthCompo.maxHealth += 10;
+                        _playerStat._healthCompo.currentHealth += 10;
+                    }
+                }
             };
+            
+            LevelUpText();
+        }
+        private void LevelUpText()
+        {
+            levelText.text = GameManager.Instance.GetCurNeedLevel().ToString();
         }
         
         private void ChooseRandomStats()
         {
             List<string> statNames = new List<string>(_statIncreases.Keys);
             _selectedStats = new List<string>();
-
+            
             while (_selectedStats.Count < 3)
             {
                 int index = Random.Range(0, statNames.Count);
@@ -48,24 +62,15 @@ namespace _01_Scripts.UI
                 if (!_selectedStats.Contains(stat))
                     _selectedStats.Add(stat);
             }
-
-            Debug.Log($"{_selectedStats[0]}, {_selectedStats[1]}, {_selectedStats[2]}");
         }
         
         private void EnablePanels()
         {
             // 나중에 DOTween 사용
             selects.SetActive(true);
-            
-            TMP_Text txt1 = selects.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            TMP_Text txt2 = selects.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
-            TMP_Text txt3 = selects.transform.GetChild(2).GetComponentInChildren<TMP_Text>();
-            
-            txt1.text = _selectedStats[0];
-            txt2.text = _selectedStats[1];
-            txt3.text = _selectedStats[2];
-            
             ChooseRandomStats();
+            for(int i = 0; i < selects.transform.childCount; i++)
+                selects.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = _selectedStats[i];
             Time.timeScale = 0f;
         }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
 using _01_Scripts.Core;
 using _01_Scripts.Entities;
@@ -9,7 +10,7 @@ using UnityEngine.Events;
 
 namespace _01_Scripts.Enemy
 {
-    public class EnemyRobber : Enemy, IKnockBackable
+    public class EnemySoldiers : Enemy, IKnockBackable
     {
         public UnityEvent<Vector3, float> OnKnockBackInvoke;
         private StateChange _stateChannel;
@@ -21,8 +22,6 @@ namespace _01_Scripts.Enemy
             base.Start();
             _attackCompo = GetComponentInChildren<EnemyAttackCompo>();
             _animatorTrigger = GetComponentInChildren<EntityAnimatorTrigger>();
-            if (_attackCompo == null) Debug.Log("Asdasd");
-            if (_animatorTrigger == null) Debug.Log("sfsdfsdsfs");
             _animatorTrigger.OnDamageCastTrigger += HandleAttackEvent;
             OnDeadEvent.AddListener(HandleDeathEvent);
             _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
@@ -32,8 +31,8 @@ namespace _01_Scripts.Enemy
         {
             if (IsDead) return;
             IsDead = true;
+            GameManager.Instance.AddEnemyCount();
             StartCoroutine(EnemyDying());
-            
             _stateChannel.SendEventMessage(EnemyState.DEAD);
         }
 
@@ -41,7 +40,6 @@ namespace _01_Scripts.Enemy
         {
             yield return new WaitForSeconds(4);
             Destroy(gameObject);
-            GameManager.Instance.AddEnemyCount();
         }
 
         private void HandleAttackEvent()
@@ -55,6 +53,7 @@ namespace _01_Scripts.Enemy
                     {
                         Debug.Log(_attackCompo.Damage);
                         entityHealth.ApplyDamage(_attackCompo.Damage);
+                        CameraShake.Instance.Shake();
                     }
                 }
             }

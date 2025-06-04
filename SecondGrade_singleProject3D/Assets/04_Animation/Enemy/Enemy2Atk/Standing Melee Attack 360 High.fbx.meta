@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f81cd760f4e045a439127b9a28d2b749
+guid: e88f5c997aeb38845a3fb85be6c6943e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -35,28 +35,35 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 79
+      lastFrame: 95
       wrapMode: 0
-      orientationOffsetY: 12
+      orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.75416666
+      - time: 0.8833334
         functionName: AnimationEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34166667
+        functionName: DamageCast
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

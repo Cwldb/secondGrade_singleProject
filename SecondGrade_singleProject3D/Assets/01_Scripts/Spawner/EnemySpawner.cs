@@ -7,8 +7,8 @@ namespace _01_Scripts.Spawner
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject Enemy1Prefab;
-        private List<Transform> enemySpawnPos = new();
+        [SerializeField] private List<GameObject> EnemyPrefabs = new List<GameObject>();
+        private List<Transform> enemySpawnPos = new List<Transform>();
 
         private void Start()
         {
@@ -19,7 +19,7 @@ namespace _01_Scripts.Spawner
 
         private IEnumerator SpawnEnemy()
         {
-            Instantiate(Enemy1Prefab, enemySpawnPos[Random.Range(0, 4)].position, Quaternion.identity);
+            Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Count)], enemySpawnPos[Random.Range(0, enemySpawnPos.Count)].position, Quaternion.identity);
             yield return new WaitForSeconds(4);
             StartCoroutine(SpawnEnemy());
         }

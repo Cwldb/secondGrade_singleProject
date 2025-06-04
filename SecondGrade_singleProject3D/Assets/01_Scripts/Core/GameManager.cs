@@ -7,15 +7,22 @@ namespace _01_Scripts.Core
     public class GameManager : MonoSingleton<GameManager>
     {
         public Action OnLevelUp;
+        public Action OnEnemyCount;
+        public Action OnGameOver;
 
-        [field : SerializeField] public EntityFinderSO PlayerFinder { get; set; }
-        [SerializeField] private int startLevelCount;
+        [field: SerializeField] public EntityFinderSO PlayerFinder { get; set; }
+
+        public int startLevelCount;
         
         private int _enemyCount;
+        private int _curLevel = 0;
 
         private void Start()
         {
         }
+
+        public int GetCurNeedLevel() => startLevelCount - _enemyCount;
+        public int GetCurLevel() => _curLevel;
 
         public void AddEnemyCount()
         {
@@ -23,8 +30,11 @@ namespace _01_Scripts.Core
             if (_enemyCount == startLevelCount)
             {   
                 OnLevelUp?.Invoke();
+                _enemyCount = 0;
+                _curLevel++;
                 startLevelCount+=5;
             }
+            OnEnemyCount?.Invoke();
         }
     }
 }

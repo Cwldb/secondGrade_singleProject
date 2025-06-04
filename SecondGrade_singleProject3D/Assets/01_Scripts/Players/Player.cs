@@ -2,6 +2,7 @@ using _01_Scripts.Entities;
 using _01_Scripts.FSM;
 using KJYLib.Dependencies;
 using System;
+using _01_Scripts.Core;
 using UnityEngine;
 
 namespace _01_Scripts.Players
@@ -40,6 +41,7 @@ namespace _01_Scripts.Players
         {
             _stateMachine.ChangeState("DEAD");
             PlayerInput.OnDisable();
+            GameManager.Instance.OnGameOver.Invoke();
         }
 
         private void Update()
