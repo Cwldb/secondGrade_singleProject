@@ -9616,13 +9616,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4009723535544629395, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: m_text
+      value: asdasdasdasdsad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009723535544629395, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009723535544629395, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892788971680061975, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 923190193}
+    - target: {fileID: 4892788971680061975, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: heightOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892788971680061975, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: forwardOffset
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892788971680061975, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+      propertyPath: enemyTransform
+      value: 
+      objectReference: {fileID: 923190193}
     - target: {fileID: 6770975968577172604, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.019
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6770975968577172604, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.906
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9054885364382888284, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
       propertyPath: m_Name
@@ -9640,6 +9668,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+--- !u!4 &923190193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3330243842048328311, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+  m_PrefabInstance: {fileID: 923190192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &924559644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10213,7 +10246,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 517424161615406316, guid: 17398190106b7ca45ac8cd6c82813044, type: 3}
       propertyPath: statOverrides.Array.data[2].overrideValue
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4040588259465903802, guid: 17398190106b7ca45ac8cd6c82813044, type: 3}
       propertyPath: m_LocalPosition.x
