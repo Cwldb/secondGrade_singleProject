@@ -31,14 +31,15 @@ namespace _01_Scripts.Enemy
         {
             if (IsDead) return;
             IsDead = true;
-            GameManager.Instance.AddEnemyCount();
             StartCoroutine(EnemyDying());
             _stateChannel.SendEventMessage(EnemyState.DEAD);
         }
 
         private IEnumerator EnemyDying()
         {
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(1);
+            GameManager.Instance.AddEnemyCount();
+            yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _01_Scripts.Combat;
+using _01_Scripts.Enemy;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -33,6 +34,9 @@ namespace _01_Scripts.Players.Bullet
             if (collision.gameObject.TryGetComponent(out EntityHealth health) || collision.gameObject.layer == _layer)
             {
                 var contact = collision.contacts[0];
+                EnemyHitText text = collision.gameObject.transform.GetComponentInChildren<EnemyHitText>();
+                if (text != null)
+                    text.DamageText(Damage);
                 health.ApplyDamage(Damage);
                 Destroy(gameObject);
             }
