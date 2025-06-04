@@ -23,7 +23,7 @@ namespace _01_Scripts.Core
             if (_enemyCount == startLevelCount)
             {   
                 OnLevelUp?.Invoke();
-                startLevelCount+=2;
+                startLevelCount+=5;
             }
         }
     }

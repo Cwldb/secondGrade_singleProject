@@ -56,7 +56,7 @@ namespace _01_Scripts.UI
             // 나중에 DOTween 사용
             selects.SetActive(true);
             ChooseRandomStats();
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         }
 
         private void DisablePanels()
@@ -88,9 +88,6 @@ namespace _01_Scripts.UI
         {
             string statName = _selectedStats[index];
             _statIncreases[statName]?.Invoke();
-
-            Debug.Log($"{statName} 증가됨!");
-
             selects.SetActive(false);
         }
     }
