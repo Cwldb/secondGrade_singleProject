@@ -24,7 +24,7 @@ namespace _01_Scripts.Players.States
 
         public override void Update()
         {
-            if (_detect.Colliders.Length > 0)
+            if (_detect.Colliders.Length > 0 && !_detect.isObstacle)
             {
                 _curTime += Time.deltaTime;
 

@@ -11,9 +11,13 @@ namespace _01_Scripts.Players
         public StatSO atkPowerStat, critPowerStat, critPerStat;
         
         public float radius = 0f;
-        public LayerMask layer;
+        [SerializeField] private LayerMask layer;
+        [SerializeField] private LayerMask obstacleLayer;
+        
         public Collider[] Colliders { get; set; }
         public Collider ShortEnemy { get; set; }
+
+        public bool isObstacle { get; set; }
 
         private Entity _entity;
         private EntityStat _statCompo;
@@ -42,21 +46,26 @@ namespace _01_Scripts.Players
         private void FixedUpdate()
         {
             if (_movement.CanShoot) return;
-            
+
             ShortEnemy = null;
-            Colliders = Physics.OverlapSphere(transform.position, radius, layer);
+            isObstacle = false;
 
             float shortestDistance = Mathf.Infinity;
+            Colliders = Physics.OverlapSphere(transform.position, radius, layer);
 
-            foreach (Collider col in Colliders)
+            foreach (var col in Colliders)
             {
                 float distance = Vector3.Distance(transform.position, col.transform.position);
-                if (distance < shortestDistance)
+                Vector3 dir = (col.transform.position - transform.position).normalized;
+
+                if (distance < shortestDistance && !Physics.Raycast(transform.position, dir, distance, obstacleLayer))
                 {
                     shortestDistance = distance;
                     ShortEnemy = col;
                 }
             }
+
+            isObstacle = ShortEnemy == null && Colliders.Length > 0;
         }
 
         private void OnDrawGizmos()
@@ -64,7 +73,5 @@ namespace _01_Scripts.Players
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
         }
-
-        
     }
 }
