@@ -4,6 +4,7 @@ using _01_Scripts.Core;
 using _01_Scripts.Entities;
 using _01_Scripts.Players;
 using KJYLib.StatSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -55,6 +56,15 @@ namespace _01_Scripts.UI
         {
             // 나중에 DOTween 사용
             selects.SetActive(true);
+            
+            TMP_Text txt1 = selects.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+            TMP_Text txt2 = selects.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
+            TMP_Text txt3 = selects.transform.GetChild(2).GetComponentInChildren<TMP_Text>();
+            
+            txt1.text = _selectedStats[0];
+            txt2.text = _selectedStats[1];
+            txt3.text = _selectedStats[2];
+            
             ChooseRandomStats();
             Time.timeScale = 0f;
         }

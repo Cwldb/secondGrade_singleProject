@@ -39,7 +39,7 @@ namespace _01_Scripts.Enemy
 
         private IEnumerator EnemyDying()
         {
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(4);
             Destroy(gameObject);
             GameManager.Instance.AddEnemyCount();
         }
