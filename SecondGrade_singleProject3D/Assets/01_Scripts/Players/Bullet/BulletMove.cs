@@ -36,7 +36,7 @@ namespace _01_Scripts.Players.Bullet
                 var contact = collision.contacts[0];
                 EnemyHitText text = collision.gameObject.transform.GetComponentInChildren<EnemyHitText>();
                 if (text != null)
-                    //text.DamageText(Damage);
+                    text.DamageText(Damage);
                 health.ApplyDamage(Damage);
                 Destroy(gameObject);
             }

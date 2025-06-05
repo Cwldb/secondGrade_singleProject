@@ -32,7 +32,7 @@ namespace _01_Scripts.Core
                 OnLevelUp?.Invoke();
                 _enemyCount = 0;
                 _curLevel++;
-                startLevelCount+=5;
+                startLevelCount += startLevelCount + 2;
             }
             OnEnemyCount?.Invoke();
         }
