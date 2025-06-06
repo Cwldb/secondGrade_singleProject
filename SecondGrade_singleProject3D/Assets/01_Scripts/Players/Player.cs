@@ -28,6 +28,18 @@ namespace _01_Scripts.Players
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
+            
+            PlayerInput.OnActive1Pressed += HandleActive1Pressed;
+        }
+
+        private void OnDisable()
+        {
+            PlayerInput.OnActive1Pressed -= HandleActive1Pressed;
+        }
+
+        private void HandleActive1Pressed()
+        {
+            ChangeState("Active1");
         }
 
         protected override void Start()

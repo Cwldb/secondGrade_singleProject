@@ -10,7 +10,7 @@ namespace _01_Scripts.Players
         [SerializeField] private LayerMask whatIsGround;
         // public event Action<Vector2> OnMovementChange;
         public event Action OnAttackPressed;
-        public event Action OnRollingPressed;
+        public event Action OnActive1Pressed;
         
         public Vector2 MovementKey { get; private set; }
         
@@ -43,16 +43,16 @@ namespace _01_Scripts.Players
             if(context.performed)
                 OnAttackPressed?.Invoke();
         }
-
-        public void OnRolling(InputAction.CallbackContext context)
-        {
-            if(context.performed)
-                OnRollingPressed?.Invoke();
-        }
-
+        
         public void OnPointer(InputAction.CallbackContext context)
         {
             _screenPosition = context.ReadValue<Vector2>();
+        }
+
+        public void OnActiveSkill1(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                OnActive1Pressed?.Invoke();
         }
 
         public Vector3 GetWorldPosition()
