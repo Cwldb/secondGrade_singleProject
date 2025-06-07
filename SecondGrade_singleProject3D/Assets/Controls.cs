@@ -126,6 +126,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActiveSkill2"",
+                    ""type"": ""Button"",
+                    ""id"": ""353df3a9-d278-452f-8faf-6bfae1771fff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -346,6 +355,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""ActiveSkill1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf69b1a8-d4b3-4ccd-ab3b-b3d0bddaeec4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ActiveSkill2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -937,6 +957,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
         m_Player_ActiveSkill1 = m_Player.FindAction("ActiveSkill1", throwIfNotFound: true);
+        m_Player_ActiveSkill2 = m_Player.FindAction("ActiveSkill2", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1034,6 +1055,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Pointer;
     private readonly InputAction m_Player_ActiveSkill1;
+    private readonly InputAction m_Player_ActiveSkill2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1061,6 +1083,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ActiveSkill1".
         /// </summary>
         public InputAction @ActiveSkill1 => m_Wrapper.m_Player_ActiveSkill1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ActiveSkill2".
+        /// </summary>
+        public InputAction @ActiveSkill2 => m_Wrapper.m_Player_ActiveSkill2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1099,6 +1125,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ActiveSkill1.started += instance.OnActiveSkill1;
             @ActiveSkill1.performed += instance.OnActiveSkill1;
             @ActiveSkill1.canceled += instance.OnActiveSkill1;
+            @ActiveSkill2.started += instance.OnActiveSkill2;
+            @ActiveSkill2.performed += instance.OnActiveSkill2;
+            @ActiveSkill2.canceled += instance.OnActiveSkill2;
         }
 
         /// <summary>
@@ -1122,6 +1151,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ActiveSkill1.started -= instance.OnActiveSkill1;
             @ActiveSkill1.performed -= instance.OnActiveSkill1;
             @ActiveSkill1.canceled -= instance.OnActiveSkill1;
+            @ActiveSkill2.started -= instance.OnActiveSkill2;
+            @ActiveSkill2.performed -= instance.OnActiveSkill2;
+            @ActiveSkill2.canceled -= instance.OnActiveSkill2;
         }
 
         /// <summary>
@@ -1450,6 +1482,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActiveSkill1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ActiveSkill2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActiveSkill2(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

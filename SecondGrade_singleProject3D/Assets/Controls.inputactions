@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ActiveSkill2",
+                    "type": "Button",
+                    "id": "353df3a9-d278-452f-8faf-6bfae1771fff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -260,6 +269,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ActiveSkill1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf69b1a8-d4b3-4ccd-ab3b-b3d0bddaeec4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ActiveSkill2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

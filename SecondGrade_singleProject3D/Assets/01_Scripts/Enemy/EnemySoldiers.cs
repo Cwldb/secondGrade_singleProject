@@ -31,8 +31,8 @@ namespace _01_Scripts.Enemy
         {
             if (IsDead) return;
             IsDead = true;
-            StartCoroutine(EnemyDying());
             _stateChannel.SendEventMessage(EnemyState.DEAD);
+            StartCoroutine(EnemyDying());
         }
 
         private IEnumerator EnemyDying()

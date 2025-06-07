@@ -11,6 +11,7 @@ namespace _01_Scripts.Players
         // public event Action<Vector2> OnMovementChange;
         public event Action OnAttackPressed;
         public event Action OnActive1Pressed;
+        public event Action OnActive2Pressed;
         
         public Vector2 MovementKey { get; private set; }
         
@@ -53,6 +54,12 @@ namespace _01_Scripts.Players
         {
             if(context.performed)
                 OnActive1Pressed?.Invoke();
+        }
+
+        public void OnActiveSkill2(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                OnActive2Pressed?.Invoke();
         }
 
         public Vector3 GetWorldPosition()

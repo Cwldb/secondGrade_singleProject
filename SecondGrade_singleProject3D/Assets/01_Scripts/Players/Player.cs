@@ -15,6 +15,7 @@ namespace _01_Scripts.Players
         [SerializeField] private StateDataSO[] states;
         
         private EntityStateMachine _stateMachine;
+        private PlayerSkillSet _skillSet;
 
         [Provide]
         public Player ProvidePlayer() => this;
@@ -28,6 +29,7 @@ namespace _01_Scripts.Players
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
+            _skillSet = GetComponentInChildren<PlayerSkillSet>();
             
             PlayerInput.OnActive1Pressed += HandleActive1Pressed;
         }
@@ -39,7 +41,8 @@ namespace _01_Scripts.Players
 
         private void HandleActive1Pressed()
         {
-            ChangeState("Active1");
+            if (!_skillSet) return;
+            ChangeState("ACTIVE1");
         }
 
         protected override void Start()
