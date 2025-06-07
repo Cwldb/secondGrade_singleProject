@@ -19,15 +19,11 @@ namespace _01_Scripts.Players
         private float _currentCooldown = 6f;
 
         public bool CanUseActive1 { get; set; } = true;
+        public bool CanUseActive2 { get; set; } = true;
         
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
-        }
-
-        private void Awake()
-        {  
-            _player.PlayerInput.OnActive1Pressed += UseActive1;
         }
 
         private void Update()
@@ -54,6 +50,11 @@ namespace _01_Scripts.Players
             var effect = Instantiate(particle, transform.position, Quaternion.Euler(-90, 0, 0));
             effect.transform.parent = null;
             CameraShake.Instance.ActiveShake();
+        }
+        
+        public void UseActive2()
+        {
+            
         }
         
         private void OnDrawGizmos()

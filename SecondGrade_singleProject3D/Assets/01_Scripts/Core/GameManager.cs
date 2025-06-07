@@ -13,6 +13,7 @@ namespace _01_Scripts.Core
         [field: SerializeField] public EntityFinderSO PlayerFinder { get; set; }
 
         public int startLevelCount;
+        public float enemySpawnDelay;
         
         private int _enemyCount;
         private int _curLevel = 0;

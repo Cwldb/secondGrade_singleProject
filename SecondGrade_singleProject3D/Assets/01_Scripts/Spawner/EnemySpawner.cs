@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _01_Scripts.Core;
 using UnityEngine;
 
 namespace _01_Scripts.Spawner
@@ -20,7 +21,7 @@ namespace _01_Scripts.Spawner
         private IEnumerator SpawnEnemy()
         {
             Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Count)], enemySpawnPos[Random.Range(0, enemySpawnPos.Count)].position, Quaternion.identity);
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(GameManager.Instance.enemySpawnDelay);
             StartCoroutine(SpawnEnemy());
         }
     }

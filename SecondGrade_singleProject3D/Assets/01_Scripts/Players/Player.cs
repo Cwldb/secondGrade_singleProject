@@ -32,6 +32,7 @@ namespace _01_Scripts.Players
             _skillSet = GetComponentInChildren<PlayerSkillSet>();
             
             PlayerInput.OnActive1Pressed += HandleActive1Pressed;
+            PlayerInput.OnActive2Pressed += HandleActive2Pressed;
         }
 
         private void OnDisable()
@@ -41,8 +42,14 @@ namespace _01_Scripts.Players
 
         private void HandleActive1Pressed()
         {
-            if (!_skillSet.CanUseActive1) return;
-            ChangeState("ACTIVE1");
+            if (_skillSet.CanUseActive1)
+                ChangeState("ACTIVE1");
+        }
+        
+        private void HandleActive2Pressed()
+        {
+            if (_skillSet.CanUseActive2)
+                ChangeState("ACTIVE2");
         }
 
         protected override void Start()
