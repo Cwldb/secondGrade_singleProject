@@ -41,7 +41,7 @@ namespace _01_Scripts.Players
 
         private void HandleActive1Pressed()
         {
-            if (!_skillSet) return;
+            if (!_skillSet.CanUseActive1) return;
             ChangeState("ACTIVE1");
         }
 
