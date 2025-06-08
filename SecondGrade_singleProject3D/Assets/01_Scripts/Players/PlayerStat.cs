@@ -80,7 +80,7 @@ namespace _01_Scripts.Players
 
         private void Start()
         {
-            OnStatValueChanged.Invoke();
+            OnStatValueChanged?.Invoke();
         }
 
         public void AfterInitialize()
