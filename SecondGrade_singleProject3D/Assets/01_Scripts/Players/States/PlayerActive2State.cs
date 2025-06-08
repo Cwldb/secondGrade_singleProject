@@ -18,7 +18,7 @@ namespace _01_Scripts.Players.States
             base.Enter();
             _curTime = 0;
             _movement.CanManualMovement = false;
-            _playerSkill.UseActive1();
+            _playerSkill.UseActive2();
         }
 
         public override void Update()

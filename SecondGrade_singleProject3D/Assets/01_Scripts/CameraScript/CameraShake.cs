@@ -22,16 +22,30 @@ namespace _01_Scripts.CameraScript
             StartCoroutine(EndShake());
         }
 
-        public void ActiveShake()
+        public void Active1Shake()
         {
-            virtualCamera.AmplitudeGain = 5;
-            virtualCamera.FrequencyGain = 5;
-            StartCoroutine(EndShake());
+            virtualCamera.AmplitudeGain = 10;
+            virtualCamera.FrequencyGain = 10;
+            StartCoroutine(EndActiveShake());
+        }
+        
+        public void Active2Shake()
+        {
+            virtualCamera.AmplitudeGain = 15;
+            virtualCamera.FrequencyGain = 15;
+            StartCoroutine(EndActiveShake());
         }
 
         private IEnumerator EndShake()
         {
             yield return new WaitForSeconds(0.1f);
+            virtualCamera.AmplitudeGain = 0;
+            virtualCamera.FrequencyGain = 0;
+        }
+        
+        private IEnumerator EndActiveShake()
+        {
+            yield return new WaitForSeconds(0.3f);
             virtualCamera.AmplitudeGain = 0;
             virtualCamera.FrequencyGain = 0;
         }

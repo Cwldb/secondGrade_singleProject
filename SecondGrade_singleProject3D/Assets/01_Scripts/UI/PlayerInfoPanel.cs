@@ -29,17 +29,19 @@ namespace _01_Scripts.UI
             
             _playerStat.OnStatValueChanged += UpdateStat;
             _playerStat.OnStatValueChanged.Invoke();
+            skill1Image.fillAmount = 1;
         }
 
         private void Update()
         {
             if(_playerSkillSet != null)
-                skill1Image.fillAmount = _playerSkillSet._currentCooldown / _playerSkillSet.cooldownTime;
+                if(!_playerSkillSet.CanUseActive1)
+                    skill1Image.fillAmount = _playerSkillSet.CurrentCooldown / _playerSkillSet.cooldownTime;
         }
 
         private void UpdateStat()
         {
-            atkText.text = $"{_playerStat.Damage}";
+            atkText.text = $"{Mathf.Floor(_playerStat.Damage * 10f) / 10f}";
             aspdText.text = $"{_playerStat.AttackSpeed}";
             criText.text = $"{_playerStat.CritPer * 100}";
             dcriText.text = $"{_playerStat.CritPower}";
