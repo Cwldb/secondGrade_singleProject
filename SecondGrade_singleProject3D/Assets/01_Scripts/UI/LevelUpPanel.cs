@@ -82,9 +82,13 @@ namespace _01_Scripts.UI
                 var child = selects.transform.GetChild(i);
                 child.GetComponentInChildren<TMP_Text>().text = _selectedStats[i];
 
-                var image = child.transform.GetChild(1).GetComponent<Image>();
+                var image = child.transform.GetChild(2).GetComponent<Image>();
                 if (image != null)
                     image.sprite = levelUpIcons[_selectedIndices[i]];
+                
+                var description = child.transform.GetChild(1).GetComponent<TMP_Text>();
+                if(description != null)
+                    description.text = descriptionTexts[_selectedIndices[i]];
             }
             
             Time.timeScale = 0f;

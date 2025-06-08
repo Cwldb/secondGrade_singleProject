@@ -28,6 +28,7 @@ namespace _01_Scripts.UI
             _playerSkillSet = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerSkillSet>();
             
             _playerStat.OnStatValueChanged += UpdateStat;
+            _playerStat.OnStatValueChanged.Invoke();
         }
 
         private void Update()
