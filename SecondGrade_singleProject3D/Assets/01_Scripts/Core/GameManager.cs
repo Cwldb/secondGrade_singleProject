@@ -30,14 +30,12 @@ namespace _01_Scripts.Core
                 if (_enemyCount % 3 == 0)
                 {
                     OnActiveLevelUp?.Invoke();
-                    Debug.Log("GameManager: OnActiveLevelUp");
                 }
                 else
                     OnLevelUp?.Invoke();
                 _enemyCount = 0;
                 _curLevel++;
-                //startLevelCount += startLevelCount + 2;
-                startLevelCount = startLevelCount + 1;
+                startLevelCount += startLevelCount + 2;
             }
             OnEnemyCount?.Invoke();
         }

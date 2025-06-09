@@ -45023,7 +45023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerFinder>k__BackingField: {fileID: 11400000, guid: 1352cc41314ae7940af8ee9558a37145, type: 2}
   startLevelCount: 5
-  enemySpawnDelay: 0.5
+  enemySpawnDelay: 1.2
 --- !u!114 &1119613147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54152,8 +54152,8 @@ MonoBehaviour:
   damage: 50
   cooldownTime1: 1
   bombPrefab: {fileID: 4323207474502946147, guid: 392ebbb37ca50a74db7bc8f443d6ffb7, type: 3}
-  bombSpawnRange: 10
-  bombCount: 20
+  bombSpawnRange: 7
+  bombCount: 30
   cooldownTime2: 1
 --- !u!1001 &1390363156
 PrefabInstance:

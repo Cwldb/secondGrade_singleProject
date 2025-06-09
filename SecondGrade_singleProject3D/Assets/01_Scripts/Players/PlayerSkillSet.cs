@@ -91,7 +91,7 @@ namespace _01_Scripts.Players
 
         private IEnumerator SpawnBomb()
         {
-            yield return new WaitForSeconds(Random.Range(0.2f, 1f));
+            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
             Vector3 randomPos = GetRandomPositionAroundPlayer();
             Instantiate(bombPrefab, randomPos, Quaternion.identity);
         }
