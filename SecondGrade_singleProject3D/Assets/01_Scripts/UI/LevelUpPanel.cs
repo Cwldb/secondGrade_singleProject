@@ -13,16 +13,24 @@ namespace _01_Scripts.UI
 {
     public class LevelUpPanel : MonoBehaviour
     {
-        [SerializeField] private GameObject selects;
+        [SerializeField] private GameObject statLevelUpPanel;
+        [SerializeField] private GameObject activeLevelUpPanel;
         [SerializeField] private TMP_Text levelText;
+        
+        [Header("names")]
+        [SerializeField] private string[] levelNames;
+        [SerializeField] private string[] activeNames;
         
         [Header("Icons")]
         [SerializeField] private Sprite[] levelUpIcons;
+        [SerializeField] private Sprite[] activeIcons;
         
         [Header("Description")]
         [SerializeField] private string[] descriptionTexts;
+        [SerializeField] private string[] activeDescriptionTexts;
         
         private PlayerStat _playerStat;
+        private PlayerSkillSet _playerSkillSet;
         private Entity _entity;
         
         private Dictionary<string, Action> _statIncreases;
@@ -32,10 +40,12 @@ namespace _01_Scripts.UI
         private void Start()
         {
             GameManager.Instance.OnLevelUp += EnablePanels;
+            GameManager.Instance.OnActiveLevelUp += EnableActivePanels;
             GameManager.Instance.OnEnemyCount += LevelUpText;
             
             _entity = GameManager.Instance.PlayerFinder.Target;
             _playerStat = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerStat>();
+            _playerSkillSet = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerSkillSet>();
             
             _statIncreases = new Dictionary<string, Action>
             {
@@ -77,19 +87,62 @@ namespace _01_Scripts.UI
                 }
             }
         }
+
+        private void EnableActivePanels()
+        {
+            Transform trm = activeLevelUpPanel.transform;
+            Sequence seq = DOTween.Sequence();
+            activeLevelUpPanel.SetActive(true);
+            
+            for (int i = 0; i < activeLevelUpPanel.transform.childCount; i++)
+            {
+                var child = activeLevelUpPanel.transform.GetChild(i);
+                child.GetComponentInChildren<TMP_Text>().text = activeNames[i];
+
+                var image = child.transform.GetChild(2).GetComponent<Image>();
+                if (image != null)
+                    image.sprite = activeIcons[i];
+                
+                var description = child.transform.GetChild(1).GetComponent<TMP_Text>();
+                if(description != null)
+                    description.text = activeDescriptionTexts[i];
+            }
+            
+            seq.SetUpdate(true);
+            Time.timeScale = 0;
+            
+            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.3f));
+            seq.Play();
+        }
+        
+        private void DisableActivePanels()
+        {
+            Transform trm = activeLevelUpPanel.transform;
+            Sequence seq = DOTween.Sequence();
+
+            seq.SetUpdate(true);
+            seq.Append(trm.GetChild(0).transform.DOMoveY(1400, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(1400, 0.3f));
+            seq.OnComplete(() =>
+            {
+                statLevelUpPanel.SetActive(false);
+                Time.timeScale = 1;
+            });
+        }
         
         private void EnablePanels()
         {
-            Transform trm = selects.transform;
+            Transform trm = statLevelUpPanel.transform;
             Sequence seq = DOTween.Sequence();
-            selects.SetActive(true);
+            statLevelUpPanel.SetActive(true);
             
             ChooseRandomStats();
             
-            for (int i = 0; i < selects.transform.childCount; i++)
+            for (int i = 0; i < statLevelUpPanel.transform.childCount; i++)
             {
-                var child = selects.transform.GetChild(i);
-                child.GetComponentInChildren<TMP_Text>().text = _selectedStats[i];
+                var child = statLevelUpPanel.transform.GetChild(i);
+                child.GetComponentInChildren<TMP_Text>().text = levelNames[_selectedIndices[i]];
 
                 var image = child.transform.GetChild(2).GetComponent<Image>();
                 if (image != null)
@@ -102,31 +155,49 @@ namespace _01_Scripts.UI
             seq.SetUpdate(true);
             Time.timeScale = 0;
             
-            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.4f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.4f));
-            seq.Append(trm.GetChild(2).transform.DOMoveY(540, 0.4f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.3f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(540, 0.3f));
             seq.Play();
         }
 
         private void DisablePanels()
         {
-            Transform trm = selects.transform;
+            Transform trm = statLevelUpPanel.transform;
             Sequence seq = DOTween.Sequence();
 
             seq.SetUpdate(true);
-            seq.Append(trm.GetChild(0).transform.DOMoveY(1400, 0.4f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(1400, 0.4f));
-            seq.Append(trm.GetChild(2).transform.DOMoveY(1400, 0.4f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(1400, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(1400, 0.3f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(1400, 0.3f));
             seq.OnComplete(() =>
             {
-                selects.SetActive(false);
+                statLevelUpPanel.SetActive(false);
                 Time.timeScale = 1;
             });
         }
 
+        public void SelectActive1()
+        {
+            activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            {
+                _playerSkillSet.radius += 0.5f;
+                DisableActivePanels();
+            });
+        }
+
+        public void SelectActive2()
+        {
+            activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            {
+                _playerSkillSet.damage += 5f;
+                DisableActivePanels();
+            });
+        }
+        
         public void Select1()
         {
-            selects.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(0);
                 DisablePanels();
@@ -136,7 +207,7 @@ namespace _01_Scripts.UI
         public void Select2()
         {
             
-            selects.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(1);
                 DisablePanels();
@@ -145,7 +216,7 @@ namespace _01_Scripts.UI
 
         public void Select3()
         {
-            selects.transform.GetChild(2).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(2).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(2);
                 DisablePanels();

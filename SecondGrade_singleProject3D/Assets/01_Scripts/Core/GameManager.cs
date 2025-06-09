@@ -7,6 +7,7 @@ namespace _01_Scripts.Core
     public class GameManager : MonoSingleton<GameManager>
     {
         public Action OnLevelUp;
+        public Action OnActiveLevelUp;
         public Action OnEnemyCount;
         public Action OnGameOver;
 
@@ -16,11 +17,7 @@ namespace _01_Scripts.Core
         public float enemySpawnDelay;
         
         private int _enemyCount;
-        private int _curLevel = 0;
-
-        private void Start()
-        {
-        }
+        private int _curLevel = 1;
 
         public int GetCurNeedLevel() => startLevelCount - _enemyCount;
         public int GetCurLevel() => _curLevel;
@@ -29,11 +26,18 @@ namespace _01_Scripts.Core
         {
             _enemyCount++;
             if (_enemyCount == startLevelCount)
-            {   
-                OnLevelUp?.Invoke();
+            {
+                if (_enemyCount % 3 == 0)
+                {
+                    OnActiveLevelUp?.Invoke();
+                    Debug.Log("GameManager: OnActiveLevelUp");
+                }
+                else
+                    OnLevelUp?.Invoke();
                 _enemyCount = 0;
                 _curLevel++;
-                startLevelCount += startLevelCount + 2;
+                //startLevelCount += startLevelCount + 2;
+                startLevelCount = startLevelCount + 1;
             }
             OnEnemyCount?.Invoke();
         }
