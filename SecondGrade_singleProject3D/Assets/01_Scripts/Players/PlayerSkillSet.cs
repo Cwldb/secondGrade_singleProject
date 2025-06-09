@@ -9,8 +9,8 @@ namespace _01_Scripts.Players
     public class PlayerSkillSet : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private LayerMask layer;
-        [SerializeField] private float radius1;
-        [SerializeField] private float damage1;
+        [SerializeField] private float radius;
+        [SerializeField] private float damage;
         [SerializeField] private ParticleSystem smokeParticle;
         [SerializeField] private ParticleSystem crackParticle;
         public float cooldownTime = 6f;
@@ -41,12 +41,12 @@ namespace _01_Scripts.Players
         {
             CanUseActive1 = false;
             CurrentCooldown = 0;
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, radius1, _targets, layer);
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, radius, _targets, layer);
             for (int i = 0; i < hitCount; i++)
             {
                 Collider target = _targets[i];
                 if (target.TryGetComponent(out EntityHealth health))
-                    health.ApplyDamage(damage1);
+                    health.ApplyDamage(damage);
             }
             var smokeEffect = Instantiate(smokeParticle, transform.position, Quaternion.Euler(-90, 0, 0));
             var crackEffect = Instantiate(crackParticle, transform.position, Quaternion.Euler(-90, 0, 0));
@@ -64,7 +64,7 @@ namespace _01_Scripts.Players
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, radius1);
+            Gizmos.DrawWireSphere(transform.position, radius);
         }
     }
 }
