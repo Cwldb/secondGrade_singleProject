@@ -12,10 +12,10 @@ namespace _01_Scripts.Players
     {
         [SerializeField] private LayerMask layer;
         [Header("Active1")]
-        [SerializeField] private float radius = 6;
-        [SerializeField] private float damage = 50;
         [SerializeField] private ParticleSystem smokeParticle;
         [SerializeField] private ParticleSystem crackParticle;
+        public float radius = 4;
+        public float damage = 50;
         public float cooldownTime1 = 10f;
         
         [Header("Active2")]
@@ -36,6 +36,12 @@ namespace _01_Scripts.Players
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
+        }
+
+        private void Start()
+        {
+            CurrentCooldown1 = cooldownTime1;
+            CurrentCooldown2 = cooldownTime2;
         }
 
         private void Update()

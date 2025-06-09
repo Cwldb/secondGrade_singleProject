@@ -16,7 +16,7 @@ namespace _01_Scripts.Enemy
 
         private IEnumerator DestroyText()
         {
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.7f);
             _text.text = "";
         }
     }

@@ -58,7 +58,9 @@ namespace _01_Scripts.Players
                 float distance = Vector3.Distance(transform.position, col.transform.position);
                 Vector3 dir = (col.transform.position - transform.position).normalized;
 
-                if (distance < shortestDistance && !Physics.Raycast(transform.position, dir, distance, obstacleLayer))
+                if (distance < shortestDistance 
+                    && !Physics.Raycast(transform.position, dir, distance, obstacleLayer) 
+                    && Physics.Raycast(transform.position, dir, distance, layer))
                 {
                     shortestDistance = distance;
                     ShortEnemy = col;

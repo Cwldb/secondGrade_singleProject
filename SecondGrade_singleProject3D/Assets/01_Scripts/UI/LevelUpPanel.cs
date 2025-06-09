@@ -15,8 +15,10 @@ namespace _01_Scripts.UI
     {
         [SerializeField] private GameObject selects;
         [SerializeField] private TMP_Text levelText;
+        
         [Header("Icons")]
         [SerializeField] private Sprite[] levelUpIcons;
+        
         [Header("Description")]
         [SerializeField] private string[] descriptionTexts;
         

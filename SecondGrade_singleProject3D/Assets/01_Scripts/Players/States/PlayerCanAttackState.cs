@@ -36,8 +36,8 @@ namespace _01_Scripts.Players.States
             }
             else
             {
-                _curTime = 0;
                 _hasFired = false;
+                _curTime = 0;
             }
         }
 
@@ -56,9 +56,9 @@ namespace _01_Scripts.Players.States
 
             if (_curTime >= resetTime)
             {
-                _curTime = 0;
-                _movement.CanShoot = false;
                 _hasFired = false;
+                _movement.CanShoot = false;
+                _curTime = 0;
             }
         }
     }
