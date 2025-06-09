@@ -67,13 +67,11 @@ namespace _01_Scripts.Players
             }
         }
         
-        private Entity _entity;
         private EntityStat _statCompo;
         public EntityHealth _healthCompo { get; set; }
 
         public void Initialize(Entity entity)
         {
-            _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
             _healthCompo = entity.GetCompo<EntityHealth>();
         }

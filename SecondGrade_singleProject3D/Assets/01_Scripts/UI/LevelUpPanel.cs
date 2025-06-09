@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using _01_Scripts.Core;
+using _01_Scripts.Entities;
 using _01_Scripts.Players;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +21,7 @@ namespace _01_Scripts.UI
         [SerializeField] private string[] descriptionTexts;
         
         private PlayerStat _playerStat;
+        private Entity _entity;
         
         private Dictionary<string, Action> _statIncreases;
         private List<string> _selectedStats;
@@ -29,6 +32,7 @@ namespace _01_Scripts.UI
             GameManager.Instance.OnLevelUp += EnablePanels;
             GameManager.Instance.OnEnemyCount += LevelUpText;
             
+            _entity = GameManager.Instance.PlayerFinder.Target;
             _playerStat = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerStat>();
             
             _statIncreases = new Dictionary<string, Action>
@@ -39,8 +43,9 @@ namespace _01_Scripts.UI
                 { "CritPower", () => _playerStat.CritPower += 0.25f },
                 { "Health", () =>
                     {
-                        _playerStat._healthCompo.maxHealth += 10;
-                        _playerStat._healthCompo.currentHealth += 10;
+                        _playerStat._healthCompo.maxHealth += 25;
+                        _playerStat._healthCompo.currentHealth += 25;
+                        _entity.OnHitEvent.Invoke();
                     }
                 }
             };
@@ -73,8 +78,10 @@ namespace _01_Scripts.UI
         
         private void EnablePanels()
         {
-            // 나중에 DOTween 사용
+            Transform trm = selects.transform;
+            Sequence seq = DOTween.Sequence();
             selects.SetActive(true);
+            
             ChooseRandomStats();
             
             for (int i = 0; i < selects.transform.childCount; i++)
@@ -90,40 +97,63 @@ namespace _01_Scripts.UI
                 if(description != null)
                     description.text = descriptionTexts[_selectedIndices[i]];
             }
+            seq.SetUpdate(true);
+            Time.timeScale = 0;
             
-            Time.timeScale = 0f;
+            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.4f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.4f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(540, 0.4f));
+            seq.Play();
         }
 
         private void DisablePanels()
         {
-            // 나중에 DOTween 사용
-            selects.SetActive(false);
-            Time.timeScale = 1;
+            Transform trm = selects.transform;
+            Sequence seq = DOTween.Sequence();
+
+            seq.SetUpdate(true);
+            seq.Append(trm.GetChild(0).transform.DOMoveY(1400, 0.4f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(1400, 0.4f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(1400, 0.4f));
+            seq.OnComplete(() =>
+            {
+                selects.SetActive(false);
+                Time.timeScale = 1;
+            });
         }
 
         public void Select1()
         {
-            ApplyStatIncrease(0);
-            DisablePanels();
+            selects.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            {
+                ApplyStatIncrease(0);
+                DisablePanels();
+            });
         }
 
         public void Select2()
         {
-            ApplyStatIncrease(1);
-            DisablePanels();
+            
+            selects.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            {
+                ApplyStatIncrease(1);
+                DisablePanels();
+            });
         }
 
         public void Select3()
         {
-            ApplyStatIncrease(2);
-            DisablePanels();
+            selects.transform.GetChild(2).transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), 0.2f).SetUpdate(true).OnComplete(() =>
+            {
+                ApplyStatIncrease(2);
+                DisablePanels();
+            });
         }
         
         private void ApplyStatIncrease(int index)
         {
             string statName = _selectedStats[index];
             _statIncreases[statName]?.Invoke();
-            selects.SetActive(false);
         }
     }
 }

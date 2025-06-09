@@ -1,5 +1,7 @@
 ﻿using System;
+using _01_Scripts.Combat;
 using _01_Scripts.Core;
+using _01_Scripts.Entities;
 using _01_Scripts.Players;
 using TMPro;
 using UnityEngine;
@@ -15,28 +17,41 @@ namespace _01_Scripts.UI
         [SerializeField] private TMP_Text criText;
         [SerializeField] private TMP_Text dcriText;
         
+        [Header("Health")]
+        [SerializeField] private TMP_Text healthText;
+        [SerializeField] private Image healthBar;
+        
         [Header("Skills")]
         [SerializeField] private Image skill1Image;
         [SerializeField] private Image skill2Image;
         
         private PlayerStat _playerStat;
         private PlayerSkillSet _playerSkillSet;
+        private EntityHealth _playerHealth;
+        private Entity _entity;
 
         private void Start()
         {
             _playerStat = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerStat>();
             _playerSkillSet = GameManager.Instance.PlayerFinder.Target.GetCompo<PlayerSkillSet>();
+            _playerHealth = GameManager.Instance.PlayerFinder.Target.GetCompo<EntityHealth>();
+            _entity = GameManager.Instance.PlayerFinder.Target;
             
             _playerStat.OnStatValueChanged += UpdateStat;
+            _entity.OnHitEvent.AddListener(UpdateHealth);
             _playerStat.OnStatValueChanged.Invoke();
             skill1Image.fillAmount = 1;
         }
 
         private void Update()
         {
-            if(_playerSkillSet != null)
+            if (_playerSkillSet != null)
+            {
                 if(!_playerSkillSet.CanUseActive1)
-                    skill1Image.fillAmount = _playerSkillSet.CurrentCooldown / _playerSkillSet.cooldownTime;
+                    skill1Image.fillAmount = _playerSkillSet.CurrentCooldown1 / _playerSkillSet.cooldownTime1;
+                if(!_playerSkillSet.CanUseActive2)
+                    skill2Image.fillAmount = _playerSkillSet.CurrentCooldown2 / _playerSkillSet.cooldownTime2;
+            }
         }
 
         private void UpdateStat()
@@ -45,6 +60,12 @@ namespace _01_Scripts.UI
             aspdText.text = $"{_playerStat.AttackSpeed}";
             criText.text = $"{_playerStat.CritPer * 100}";
             dcriText.text = $"{_playerStat.CritPower}";
+        }
+
+        private void UpdateHealth()
+        {
+            healthText.text = $"{_playerHealth.currentHealth} / {_playerHealth.maxHealth}";
+            healthBar.fillAmount = _playerHealth.currentHealth / _playerHealth.maxHealth;
         }
     }
 }
