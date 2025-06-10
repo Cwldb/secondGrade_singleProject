@@ -20,8 +20,8 @@ namespace _01_Scripts.Players
         
         [Header("Active2")]
         [SerializeField] private GameObject bombPrefab;
-        [SerializeField] private float bombSpawnRange = 5f;
-        [SerializeField] private int bombCount = 3;
+        public float bombSpawnRange = 7f;
+        public int bombCount = 30;
         public float cooldownTime2 = 30f;
         
         
