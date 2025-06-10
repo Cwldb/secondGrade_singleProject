@@ -1,3 +1,4 @@
+using _01_Scripts.Effect;
 using _01_Scripts.Entities;
 using DG.Tweening;
 using KJYLib.Dependencies;
