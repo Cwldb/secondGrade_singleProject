@@ -14,12 +14,6 @@ namespace _01_Scripts.Enemy
         public float attackRange = 2f;
         #endregion
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-        }
-        
         protected override void AddComponents()
         {
             base.AddComponents();

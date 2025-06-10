@@ -8,6 +8,12 @@ namespace _01_Scripts.Core
         public float Count { get; set; }
         public int Minutes { get; set; }
 
+        private bool _is1Minute;
+        private bool _is2Minute;
+        private bool _is3Minute;
+        private bool _is4Minute;
+        public bool _is5Minute { get; set; }
+
         private void Update()
         {
             Count +=  Time.deltaTime;
@@ -17,16 +23,31 @@ namespace _01_Scripts.Core
                 Count = 0;
             }
 
-            if (Minutes == 1)
+            if (Minutes == 1 && !_is1Minute)
+            {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
-            else if (Minutes == 2)
+                _is1Minute = true;
+            }
+            else if (Minutes == 2 && !_is2Minute)
+            {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
-            else if (Minutes == 3)
+                _is2Minute = true;
+            }
+            else if (Minutes == 3  && !_is3Minute)
+            {
                 GameManager.Instance.enemySpawnDelay -= 0.1f;
-            else if (Minutes == 4)
+                _is3Minute = true;
+            }
+            else if (Minutes == 4 && !_is4Minute)
+            {
                 GameManager.Instance.enemySpawnDelay -= 0.1f;
-            else if (Minutes == 5)
+                _is4Minute = true;
+            }
+            else if (Minutes == 5 && !_is5Minute)
+            {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
+                _is5Minute = true;
+            }
 
         }
     }

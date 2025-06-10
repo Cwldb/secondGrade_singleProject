@@ -69,11 +69,5 @@ namespace _01_Scripts.Players
 
             isObstacle = ShortEnemy == null && Colliders.Length > 0;
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
     }
 }

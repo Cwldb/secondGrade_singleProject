@@ -52,7 +52,6 @@ namespace _01_Scripts.Enemy
                 {
                     if (collider.TryGetComponent(out EntityHealth entityHealth))
                     {
-                        Debug.Log(_attackCompo.Damage);
                         entityHealth.ApplyDamage(_attackCompo.Damage);
                         CameraShake.Instance.Shake();
                     }

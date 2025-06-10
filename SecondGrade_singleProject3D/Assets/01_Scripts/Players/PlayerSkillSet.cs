@@ -102,11 +102,5 @@ namespace _01_Scripts.Players
             Vector3 randomPos = _player.transform.position + new Vector3(circle.x, 20f, circle.y);
             return randomPos;
         }
-        
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
     }
 }
