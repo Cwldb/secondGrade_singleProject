@@ -188,7 +188,7 @@ namespace _01_Scripts.UI
 
         public void SelectActive2()
         {
-            activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            activeLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 _playerSkillSet.damage += 5f;
                 DisableActivePanels();
