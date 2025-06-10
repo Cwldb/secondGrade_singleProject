@@ -179,7 +179,7 @@ namespace _01_Scripts.UI
 
         public void SelectActive1()
         {
-            activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 _playerSkillSet.radius += 0.5f;
                 DisableActivePanels();
@@ -188,7 +188,7 @@ namespace _01_Scripts.UI
 
         public void SelectActive2()
         {
-            activeLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            activeLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 _playerSkillSet.damage += 5f;
                 DisableActivePanels();
@@ -197,7 +197,7 @@ namespace _01_Scripts.UI
         
         public void Select1()
         {
-            statLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(0);
                 DisablePanels();
@@ -207,7 +207,7 @@ namespace _01_Scripts.UI
         public void Select2()
         {
             
-            statLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(1);
                 DisablePanels();
@@ -216,7 +216,7 @@ namespace _01_Scripts.UI
 
         public void Select3()
         {
-            statLevelUpPanel.transform.GetChild(2).transform.DOPunchScale(new Vector3(0.3f, 0.3f, 0.3f), 0.2f).SetUpdate(true).OnComplete(() =>
+            statLevelUpPanel.transform.GetChild(2).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
                 ApplyStatIncrease(2);
                 DisablePanels();
