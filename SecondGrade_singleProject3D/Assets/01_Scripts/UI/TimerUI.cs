@@ -11,7 +11,7 @@ namespace _01_Scripts.UI
 
         private void Update()
         {
-            timerText.text = $"{TimerManager.Instance.Minutes} : {Mathf.FloorToInt(TimerManager.Instance.Count)}";
+            timerText.text = $"{TimerManager.Instance.Minutes:D2} : {Mathf.FloorToInt(TimerManager.Instance.Count):D2}";
         }
     }
 }

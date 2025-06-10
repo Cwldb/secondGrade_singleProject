@@ -37,7 +37,7 @@ namespace _01_Scripts.UI
             _playerHealth = GameManager.Instance.PlayerFinder.Target.GetCompo<EntityHealth>();
             _entity = GameManager.Instance.PlayerFinder.Target;
             
-            _playerStat.OnStatValueChanged += UpdateStat;
+            _playerStat.OnStatValueChanged += UpdateStat; 
             _entity.OnHitEvent.AddListener(UpdateHealth);
             _playerStat.OnStatValueChanged.Invoke();
             skill1Image.fillAmount = 1;
@@ -57,9 +57,9 @@ namespace _01_Scripts.UI
         private void UpdateStat()
         {
             atkText.text = $"{Mathf.Floor(_playerStat.Damage * 10f) / 10f}";
-            aspdText.text = $"{_playerStat.AttackSpeed}";
-            criText.text = $"{_playerStat.CritPer * 100}";
-            dcriText.text = $"{_playerStat.CritPower}";
+            aspdText.text = $"{_playerStat.AttackSpeed}초";
+            criText.text = $"{_playerStat.CritPer * 100}%";
+            dcriText.text = $"{_playerStat.CritPower}배";
         }
 
         private void UpdateHealth()
