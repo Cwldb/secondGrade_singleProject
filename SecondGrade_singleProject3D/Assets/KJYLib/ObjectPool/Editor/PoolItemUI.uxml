@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/KJYLib/ObjectPool/Editor/PoolItemUI.uss?fileID=7433441132597879392&amp;guid=4a3ae598eb652864d8bc3275a1a2d98d&amp;type=3#PoolItemUI" />
+    <ui:VisualElement name="PoolItem" class="pool_item" style="margin-bottom: 5px;">
+        <ui:Label text="Label" name="ItemName" class="title_label" />
+        <ui:Button text="X" name="DeleteBtn" class="delete_btn" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using _01_Scripts.Core;
+using _01_Scripts.Enemy;
+using KJYLib.Dependencies;
+using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
 
 namespace _01_Scripts.Spawner
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> EnemyPrefabs = new List<GameObject>();
+        [SerializeField] private List<PoolItemSO> EnemyItems = new List<PoolItemSO>();
         private List<Transform> enemySpawnPos = new List<Transform>();
 
         [SerializeField] private float xMin = -10f;
         [SerializeField] private float xMax = 10f;
         [SerializeField] private float zMin = -10f;
         [SerializeField] private float zMax = 10f;
+        
+        [Inject] private PoolManagerMono _poolManagerMono;
 
         private void Start()
         {
@@ -28,11 +33,8 @@ namespace _01_Scripts.Spawner
             Transform spawnPoint = GetValidSpawnPoint();
             if (spawnPoint != null)
             {
-                Instantiate(
-                    EnemyPrefabs[Random.Range(0, EnemyPrefabs.Count)],
-                    spawnPoint.position,
-                    Quaternion.identity
-                );
+                EnemySoldiers enemy = _poolManagerMono.Pop<EnemySoldiers>(EnemyItems[Random.Range(0, EnemyItems.Count)]);
+                enemy.transform.position = spawnPoint.position;
             }
 
             yield return new WaitForSeconds(GameManager.Instance.enemySpawnDelay);

@@ -3477,6 +3477,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <PlayerFinder>k__BackingField: {fileID: 11400000, guid: 1352cc41314ae7940af8ee9558a37145, type: 2}
+  <PoolItem>k__BackingField: {fileID: 11400000, guid: cfc4c02a6d82df041a430af3494fe611, type: 2}
   attackRange: 2.2
   OnKnockBackInvoke:
     m_PersistentCalls:

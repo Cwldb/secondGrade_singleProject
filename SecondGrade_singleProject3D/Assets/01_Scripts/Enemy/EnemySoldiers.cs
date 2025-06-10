@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
@@ -16,17 +17,27 @@ namespace _01_Scripts.Enemy
         private StateChange _stateChannel;
         private EntityAnimatorTrigger _animatorTrigger;
         private EnemyAttackCompo _attackCompo;
-        
+        private EntityHealth _healthCompo;
+        private Collider _collider;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _collider = GetComponent<Collider>();
+            _healthCompo = GetComponent<EntityHealth>();
+        }
+
         protected override void Start()
         {
             base.Start();
             _attackCompo = GetComponentInChildren<EnemyAttackCompo>();
             _animatorTrigger = GetComponentInChildren<EntityAnimatorTrigger>();
+            
             _animatorTrigger.OnDamageCastTrigger += HandleAttackEvent;
             OnDeadEvent.AddListener(HandleDeathEvent);
             _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
         }
-        
+
         private void HandleDeathEvent()
         {
             if (IsDead) return;
@@ -40,7 +51,11 @@ namespace _01_Scripts.Enemy
             yield return new WaitForSeconds(1);
             GameManager.Instance.AddEnemyCount();
             yield return new WaitForSeconds(3f);
-            Destroy(gameObject);
+            _pool.Push(this);
+            _healthCompo.currentHealth = _healthCompo.maxHealth;
+            IsDead = false;
+            _collider.enabled = true;
+            _stateChannel.SendEventMessage(EnemyState.CHASE);
         }
 
         private void HandleAttackEvent()

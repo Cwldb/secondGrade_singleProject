@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bab7401c1602240aa995173ccf8613, type: 3}
+  m_Name: PoolManagerSO
+  m_EditorClassIdentifier: 
+  itemList:
+  - {fileID: 11400000, guid: cfc4c02a6d82df041a430af3494fe611, type: 2}
+  - {fileID: 11400000, guid: 371be44946b7c004f887abf2c83fdc12, type: 2}
+  - {fileID: 11400000, guid: 3e6b2c24b59052b4585915c5daca2e6e, type: 2}
+  - {fileID: 11400000, guid: 739f7ea8284f6fd44bc1267ad0233f1c, type: 2}

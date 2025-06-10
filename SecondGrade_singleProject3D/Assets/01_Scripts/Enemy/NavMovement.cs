@@ -64,7 +64,12 @@ namespace _01_Scripts.Enemy
                 _entity.transform.rotation = lookRotation;
         }
 
-        public void SetStop(bool isStop) => agent.isStopped = isStop;
+        public void SetStop(bool isStop)
+        {
+            if(agent != null && agent.enabled && agent.isOnNavMesh)
+                agent.isStopped = isStop;
+        }
+            
         public void SetVelocity(Vector3 velocity) => agent.velocity = velocity;
         public void SetSpeed(float speed) => agent.speed = speed;
         public void SetDestination(Vector3 destination) => agent.SetDestination(destination);
