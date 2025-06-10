@@ -28018,7 +28018,7 @@ MonoBehaviour:
   radius: 4
   damage: 50
   cooldownTime1: 1
-  bombPrefab: {fileID: 4323207474502946147, guid: 392ebbb37ca50a74db7bc8f443d6ffb7, type: 3}
+  bombPrefab: {fileID: 11400000, guid: dac286146c1e94d46b7e68166f5892c1, type: 2}
   bombSpawnRange: 7
   bombCount: 30
   cooldownTime2: 1

@@ -3,6 +3,9 @@ using System.Collections;
 using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
 using _01_Scripts.Entities;
+using _01_Scripts.Shelling;
+using KJYLib.Dependencies;
+using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,11 +22,12 @@ namespace _01_Scripts.Players
         public float cooldownTime1 = 10f;
         
         [Header("Active2")]
-        [SerializeField] private GameObject bombPrefab;
+        [SerializeField] private PoolItemSO bombPrefab;
         public float bombSpawnRange = 7f;
         public int bombCount = 30;
         public float cooldownTime2 = 30f;
-        
+
+        [Inject] private PoolManagerMono _poolManager;
         
         private Player _player;
         private Collider[] _targets = new Collider[100];
@@ -93,7 +97,8 @@ namespace _01_Scripts.Players
         {
             yield return new WaitForSeconds(Random.Range(0.5f, 2f));
             Vector3 randomPos = GetRandomPositionAroundPlayer();
-            Instantiate(bombPrefab, randomPos, Quaternion.identity);
+            ExplosionBomb bomb = _poolManager.Pop<ExplosionBomb>(bombPrefab);
+            bomb.transform.position = randomPos;
         }
 
         private Vector3 GetRandomPositionAroundPlayer()

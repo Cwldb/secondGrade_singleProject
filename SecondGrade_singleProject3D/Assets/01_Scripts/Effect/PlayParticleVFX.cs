@@ -1,7 +1,7 @@
-using System;
+using Blade.Effects;
 using UnityEngine;
 
-namespace Blade.Effects
+namespace _01_Scripts.Effect
 {
     public class PlayParticleVFX : MonoBehaviour, IPlayableVFX
     {

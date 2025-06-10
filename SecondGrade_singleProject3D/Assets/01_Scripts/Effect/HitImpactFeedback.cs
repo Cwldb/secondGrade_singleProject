@@ -1,17 +1,15 @@
-using _01_Scripts.Effect;
 using _01_Scripts.Entities;
-using DG.Tweening;
+using Assets.Blade.Feedbacks;
 using KJYLib.Dependencies;
 using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
 
-namespace Assets.Blade.Feedbacks
+namespace _01_Scripts.Effect
 {
     public class HitImpactFeedback : FeedBack
     {
         [SerializeField] private PoolItemSO hitImpact;
-        [SerializeField] private float playDuration = 0.5f;
-        [SerializeField] private EntityActionData actionData;
+        [SerializeField] private float playDuration = 0.2f;
 
         [Inject] private PoolManagerMono _poolManager;
 
@@ -20,9 +18,6 @@ namespace Assets.Blade.Feedbacks
         public override async void CreateFeedback()
         {
             PoolingEffect effect = _poolManager.Pop<PoolingEffect>(hitImpact);
-            Quaternion rotation = Quaternion.LookRotation(actionData.HitNormal * -1);
-
-            effect.PlayerVFX(actionData.HitPoint, rotation);
 
             await Awaitable.WaitForSecondsAsync(playDuration);
             _poolManager.Push(effect);

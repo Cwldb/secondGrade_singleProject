@@ -1,18 +1,27 @@
 ﻿using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
+using _01_Scripts.Effect;
+using Blade.Effects;
+using KJYLib.Dependencies;
+using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
 
 namespace _01_Scripts.Shelling
 {
-    public class ExplosionBomb : MonoBehaviour
+    public class ExplosionBomb : MonoBehaviour, IPoolable
     {
+        [field : SerializeField] public PoolItemSO PoolItem { get; set; }
         [SerializeField] private LayerMask layer;
         [SerializeField] private float radius;
         [SerializeField] private float damage;
         
-        [SerializeField] private ParticleSystem particle;
+        [SerializeField] private PoolItemSO particle;
+
+        [Inject] private PoolManagerMono _poolManger;
         
+        public GameObject GameObject => gameObject;
         private readonly Collider[] _targets = new Collider[100];
+        private Pool _pool;
         
         private void OnCollisionEnter(Collision collision)
         {
@@ -28,16 +37,28 @@ namespace _01_Scripts.Shelling
                 if(target.TryGetComponent(out EntityHealth health))
                     health.ApplyDamage(damage);
             }
-            var effect = Instantiate(particle, transform.position, Quaternion.Euler(0, 0, 0));
-            effect.transform.parent = null;
+            PoolingEffect effect = _poolManger.Pop<PoolingEffect>(particle);
+            
+            // var effect = Instantiate(particle, transform.position, Quaternion.Euler(0, 0, 0));
+            // effect.transform.parent = null;
             CameraShake.Instance.Active2Shake();
-            Destroy(gameObject);
+            _pool.Push(this);
         }
         
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, radius);
+        }
+
+        public void SetUpPool(Pool pool)
+        {
+            _pool = pool;
+        }
+
+        public void ResetItem()
+        {
+            
         }
     }
 }
