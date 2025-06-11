@@ -18,8 +18,10 @@ namespace _01_Scripts.Enemy
         private EntityHealth _healthCompo;
         private Collider _collider;
         
-        public float meleeRange = 3f;
-        public float jumpRange = 2.5f;
+        public float meleeRange = 2f;
+        public float jumpRange = 3f;
+
+        [SerializeField] private GameObject radius;
 
         [SerializeField] private float meleeDamage;
         [SerializeField] private float jumpDamage;
@@ -35,8 +37,12 @@ namespace _01_Scripts.Enemy
         {
             base.Start();
             _animatorTrigger = GetComponentInChildren<EntityAnimatorTrigger>();
+
+            _animatorTrigger.OnBossSwingAttackTrigger += CheckSwingAttackRadius;
+            _animatorTrigger.OnBossJumpAttackTrigger += CheckJumpAttackRadius;
             
-            _animatorTrigger.OnDamageCastTrigger += HandleMeleeAttackEvent;
+            _animatorTrigger.OnSwingDamageCastTrigger += HandleSpinAttackEvent;
+            _animatorTrigger.OnJumpingDamageCastTrigger += HandleJumpingAttackEvent;
             OnDeadEvent.AddListener(HandleDeathEvent);
             _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
         }
@@ -61,23 +67,19 @@ namespace _01_Scripts.Enemy
             _stateChannel.SendEventMessage(EnemyState.CHASE);
         }
 
-        private void HandleMeleeAttackEvent()
+        private void CheckJumpAttackRadius()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, meleeRange);
-            foreach (var collider in hitColliders)
-            {
-                if (collider.TryGetComponent(out Player player))
-                {
-                    if (collider.TryGetComponent(out EntityHealth entityHealth))
-                    {
-                        entityHealth.ApplyDamage(meleeDamage);
-                        CameraShake.Instance.Shake();
-                    }
-                }
-            }
+            radius.SetActive(true);
+            radius.transform.localScale = new Vector3(jumpRange * 2, 0.1f, jumpRange * 2);
         }
         
-        private void HandleSpinAttackEvent()
+        private void CheckSwingAttackRadius()
+        {
+            radius.SetActive(true);
+            radius.transform.localScale = new Vector3(meleeRange * 2, 0.1f, meleeRange * 2);
+        }
+
+        private void HandleJumpingAttackEvent()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, jumpRange);
             foreach (var collider in hitColliders)
@@ -91,6 +93,24 @@ namespace _01_Scripts.Enemy
                     }
                 }
             }
+            radius.SetActive(false);
+        }
+        
+        private void HandleSpinAttackEvent()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, meleeRange);
+            foreach (var collider in hitColliders)
+            {
+                if (collider.TryGetComponent(out Player player))
+                {
+                    if (collider.TryGetComponent(out EntityHealth entityHealth))
+                    {
+                        entityHealth.ApplyDamage(meleeDamage);
+                        CameraShake.Instance.Shake();
+                    }
+                }
+            }
+            radius.SetActive(false);
         }
     }
 }

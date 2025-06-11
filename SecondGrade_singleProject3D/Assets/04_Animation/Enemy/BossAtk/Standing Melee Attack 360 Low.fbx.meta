@@ -56,13 +56,34 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: NewEvent
+        functionName: SwingBossAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9958507
+      - time: 0.17012449
+        functionName: StartManualRotation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.30705395
+        functionName: StopManualRotation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4024896
+        functionName: SwingDamageCast
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.92482793
         functionName: AnimationEnd
         data: 
         objectReferenceParameter: {instanceID: 0}

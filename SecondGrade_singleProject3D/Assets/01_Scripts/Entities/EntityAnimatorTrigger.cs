@@ -10,6 +10,11 @@ namespace _01_Scripts.Entities
         public Action OnAttackVFXTrigger;
         public Action<bool> OnManualRotationTrigger;
         public Action OnDamageCastTrigger;
+        
+        public Action OnSwingDamageCastTrigger;
+        public Action OnJumpingDamageCastTrigger;
+        public Action OnBossJumpAttackTrigger;
+        public Action OnBossSwingAttackTrigger;
 
         private Entity _entity;
 
@@ -26,5 +31,10 @@ namespace _01_Scripts.Entities
         private void StartManualRotation() => OnManualRotationTrigger?.Invoke(true);
         private void StopManualRotation() => OnManualRotationTrigger?.Invoke(false);
         private void DamageCast() => OnDamageCastTrigger?.Invoke();
+        
+        private void SwingDamageCast() => OnSwingDamageCastTrigger?.Invoke();
+        private void JumpingDamageCast() => OnJumpingDamageCastTrigger?.Invoke();
+        private void JumpBossAttack() => OnBossJumpAttackTrigger?.Invoke();
+        private void SwingBossAttack() => OnBossJumpAttackTrigger?.Invoke();
     }
 }
