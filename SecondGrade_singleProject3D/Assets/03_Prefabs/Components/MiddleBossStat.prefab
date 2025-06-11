@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 930016420255045010, guid: 3be9ca833725b1c4a9589680ba29cdcd, type: 3}
       propertyPath: m_Name
-      value: MiddleBossStat Variant
+      value: MiddleBossStat
       objectReference: {fileID: 0}
     - target: {fileID: 6673836902573330098, guid: 3be9ca833725b1c4a9589680ba29cdcd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,15 +54,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179710152475972836, guid: 3be9ca833725b1c4a9589680ba29cdcd, type: 3}
       propertyPath: statOverrides.Array.data[1].overrideValue
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7179710152475972836, guid: 3be9ca833725b1c4a9589680ba29cdcd, type: 3}
       propertyPath: statOverrides.Array.data[2].overrideValue
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7179710152475972836, guid: 3be9ca833725b1c4a9589680ba29cdcd, type: 3}
       propertyPath: statOverrides.Array.data[3].overrideValue
-      value: 3.1
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

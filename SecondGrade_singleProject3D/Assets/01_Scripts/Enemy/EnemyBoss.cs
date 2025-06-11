@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+﻿using System.Collections;
 using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
 using _01_Scripts.Core;
@@ -11,15 +10,20 @@ using UnityEngine.Events;
 
 namespace _01_Scripts.Enemy
 {
-    public class EnemySoldiers : Enemy
+    public class EnemyBoss : Enemy
     {
         public UnityEvent<Vector3, float> OnKnockBackInvoke;
         private StateChange _stateChannel;
         private EntityAnimatorTrigger _animatorTrigger;
-        private EnemyAttackCompo _attackCompo;
         private EntityHealth _healthCompo;
         private Collider _collider;
+        
+        public float meleeRange = 3f;
+        public float jumpRange = 2.5f;
 
+        [SerializeField] private float meleeDamage;
+        [SerializeField] private float jumpDamage;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -30,10 +34,9 @@ namespace _01_Scripts.Enemy
         protected override void Start()
         {
             base.Start();
-            _attackCompo = GetComponentInChildren<EnemyAttackCompo>();
             _animatorTrigger = GetComponentInChildren<EntityAnimatorTrigger>();
             
-            _animatorTrigger.OnDamageCastTrigger += HandleAttackEvent;
+            _animatorTrigger.OnDamageCastTrigger += HandleMeleeAttackEvent;
             OnDeadEvent.AddListener(HandleDeathEvent);
             _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
         }
@@ -58,16 +61,32 @@ namespace _01_Scripts.Enemy
             _stateChannel.SendEventMessage(EnemyState.CHASE);
         }
 
-        private void HandleAttackEvent()
+        private void HandleMeleeAttackEvent()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, meleeRange);
             foreach (var collider in hitColliders)
             {
                 if (collider.TryGetComponent(out Player player))
                 {
                     if (collider.TryGetComponent(out EntityHealth entityHealth))
                     {
-                        entityHealth.ApplyDamage(_attackCompo.Damage);
+                        entityHealth.ApplyDamage(meleeDamage);
+                        CameraShake.Instance.Shake();
+                    }
+                }
+            }
+        }
+        
+        private void HandleSpinAttackEvent()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, jumpRange);
+            foreach (var collider in hitColliders)
+            {
+                if (collider.TryGetComponent(out Player player))
+                {
+                    if (collider.TryGetComponent(out EntityHealth entityHealth))
+                    {
+                        entityHealth.ApplyDamage(jumpDamage);
                         CameraShake.Instance.Shake();
                     }
                 }

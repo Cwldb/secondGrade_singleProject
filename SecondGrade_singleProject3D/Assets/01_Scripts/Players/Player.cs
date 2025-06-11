@@ -23,12 +23,7 @@ namespace _01_Scripts.Players
 
         [Provide]
         public Player ProvidePlayer() => this;
-
-        #region Temp region
-
-        public float rollingVelocity = 2.2f;
-
-        #endregion
+        
         protected override void Awake()
         {
             base.Awake();
