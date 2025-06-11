@@ -17,7 +17,7 @@ namespace _01_Scripts.Shelling
         
         [SerializeField] private PoolItemSO particle;
 
-        [Inject] private PoolManagerMono _poolManger;
+        public PoolManagerMono poolManager { get; set; }
         
         public GameObject GameObject => gameObject;
         private readonly Collider[] _targets = new Collider[100];
@@ -37,12 +37,18 @@ namespace _01_Scripts.Shelling
                 if(target.TryGetComponent(out EntityHealth health))
                     health.ApplyDamage(damage);
             }
-            PoolingEffect effect = _poolManger.Pop<PoolingEffect>(particle);
-            
-            // var effect = Instantiate(particle, transform.position, Quaternion.Euler(0, 0, 0));
-            // effect.transform.parent = null;
-            CameraShake.Instance.Active2Shake();
+            ExplodeEffect();
             _pool.Push(this);
+        }
+
+        private async void ExplodeEffect()
+        {
+            PoolingEffect effect = poolManager.Pop<PoolingEffect>(particle);
+            effect.PlayerVFX(transform.position, Quaternion.identity);
+            CameraShake.Instance.Active2Shake();
+
+            await Awaitable.WaitForSecondsAsync(1f);
+            poolManager.Push(effect);
         }
         
         private void OnDrawGizmos()

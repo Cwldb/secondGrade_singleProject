@@ -9318,7 +9318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <VFXName>k__BackingField: BombEffect
-  isOnPosition: 1
+  isOnPosition: 0
   particle: {fileID: 4995383324399953914}
 --- !u!1 &8814816479033841976
 GameObject:

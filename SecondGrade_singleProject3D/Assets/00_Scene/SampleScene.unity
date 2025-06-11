@@ -28013,8 +28013,8 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
-  smokeParticle: {fileID: 437928424940630499, guid: 2982954d766243349817cda676b99a52, type: 3}
-  crackParticle: {fileID: 8128125316525077329, guid: a1304e504bbc91e438690955a6187aa3, type: 3}
+  smokeParticle: {fileID: 11400000, guid: 43d817d3742661643bd92f67fe98be48, type: 2}
+  crackParticle: {fileID: 11400000, guid: a1585bb81f56ab84d81d5685ecb6cfc7, type: 2}
   radius: 4
   damage: 50
   cooldownTime1: 1

@@ -10,35 +10,35 @@ namespace _01_Scripts.Effect
 
         public GameObject GameObject => gameObject;
 
-        [SerializeField] private GameObject effectObject;
         private Pool _myPool;
-        private ParticleSystem _playParticle;
+        [SerializeField] private GameObject effectObject;
+        private IPlayableVFX _playableVFX;
 
         public void SetUpPool(Pool pool)
         {
             _myPool = pool;
-            _playParticle = effectObject.GetComponent<ParticleSystem>();
-            Debug.Assert(_playParticle != null, "effect object must have ParticleSystem component");
+            _playableVFX = effectObject.GetComponent<IPlayableVFX>();
+            Debug.Assert(_playableVFX != null, "effect object must have IPlayableVFX component");
         }
 
         public void ResetItem()
         {
-            _playParticle.Stop();
+            _playableVFX.StopVFX();
         }
 
         public void PlayerVFX(Vector3 position, Quaternion rotation)
         {
-            _playParticle.Play();
+            _playableVFX.PlayVFX(position, rotation);
         }
 
         private void OnValidate()
         {
             if (effectObject == null) return;
-            _playParticle = effectObject.GetComponent<ParticleSystem>();
-            if(_playParticle == null)
+            _playableVFX = effectObject.GetComponent<IPlayableVFX>();
+            if(_playableVFX == null)
             {
                 effectObject = null;
-                Debug.LogError("effect object must have ParticleSystem component");
+                Debug.LogError("effect object must have IPlayableVFX component");
             }
         }
     }

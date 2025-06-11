@@ -2,6 +2,7 @@
 using System.Collections;
 using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
+using _01_Scripts.Effect;
 using _01_Scripts.Entities;
 using _01_Scripts.Shelling;
 using KJYLib.Dependencies;
@@ -15,8 +16,8 @@ namespace _01_Scripts.Players
     {
         [SerializeField] private LayerMask layer;
         [Header("Active1")]
-        [SerializeField] private ParticleSystem smokeParticle;
-        [SerializeField] private ParticleSystem crackParticle;
+        [SerializeField] private PoolItemSO smokeParticle;
+        [SerializeField] private PoolItemSO crackParticle;
         public float radius = 4;
         public float damage = 50;
         public float cooldownTime1 = 10f;
@@ -76,11 +77,20 @@ namespace _01_Scripts.Players
                 if (target.TryGetComponent(out EntityHealth health))
                     health.ApplyDamage(damage);
             }
-            var smokeEffect = Instantiate(smokeParticle, transform.position, Quaternion.Euler(-90, 0, 0));
-            var crackEffect = Instantiate(crackParticle, transform.position, Quaternion.Euler(-90, 0, 0));
-            smokeEffect.transform.parent = null;
-            crackEffect.transform.parent = null;
+            PlayEffect();
             CameraShake.Instance.Active1Shake();
+        }
+
+        private async void PlayEffect()
+        {
+            PoolingEffect smokeEffect = _poolManager.Pop<PoolingEffect>(smokeParticle);
+            PoolingEffect crackEffect = _poolManager.Pop<PoolingEffect>(crackParticle);
+            smokeEffect.PlayerVFX(transform.position, Quaternion.Euler(0, Random.Range(0, 360), 0));
+            crackEffect.PlayerVFX(transform.position, Quaternion.Euler(0, Random.Range(0, 360), 0));
+            
+            await Awaitable.WaitForSecondsAsync(1f);
+            _poolManager.Push(smokeEffect);
+            _poolManager.Push(crackEffect);
         }
         
         public void UseActive2()
@@ -98,6 +108,7 @@ namespace _01_Scripts.Players
             yield return new WaitForSeconds(Random.Range(0.5f, 2f));
             Vector3 randomPos = GetRandomPositionAroundPlayer();
             ExplosionBomb bomb = _poolManager.Pop<ExplosionBomb>(bombPrefab);
+            bomb.poolManager = _poolManager;
             bomb.transform.position = randomPos;
         }
 
