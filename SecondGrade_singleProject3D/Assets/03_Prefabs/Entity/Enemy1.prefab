@@ -577,6 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7547619134166931646}
   - component: {fileID: 737089862536941093}
+  - component: {fileID: 1239831031385553025}
   m_Layer: 6
   m_Name: HitFeedback
   m_TagString: Untagged
@@ -615,6 +616,20 @@ MonoBehaviour:
   blinkEffectParent: {fileID: 9012104227767451599}
   blinkDuration: 0.15
   blinkIntensity: 0.2
+--- !u!114 &1239831031385553025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446283750064825035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42c16e69df64783b4ebbb23d9b290c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitImpact: {fileID: 11400000, guid: b57b95eeabd0b3b4084b1822d11630e9, type: 2}
+  playDuration: 1
 --- !u!1 &1503477537291866881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,6 +3454,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 737089862536941093}
         m_TargetAssemblyTypeName: BlinkFeedback, Assembly-CSharp
+        m_MethodName: CreateFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1239831031385553025}
+        m_TargetAssemblyTypeName: Blade.Feedbacks.HitFeedBack, Assembly-CSharp
         m_MethodName: CreateFeedback
         m_Mode: 1
         m_Arguments:

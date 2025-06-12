@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 71f14a2d79f732f4d9893ef1b911f4ff, type: 2}
   m_HaloStrength: 0.322
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1166,7 +1166,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -130.22357}
-  m_SizeDelta: {x: 0, y: -274.3233}
+  m_SizeDelta: {x: -100, y: -274.3233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &93000848
 MonoBehaviour:
@@ -1474,7 +1474,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -130.22357}
-  m_SizeDelta: {x: 0, y: -274.3233}
+  m_SizeDelta: {x: -100, y: -274.3233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &119956216
 MonoBehaviour:
@@ -5216,7 +5216,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -130.22357}
-  m_SizeDelta: {x: 0, y: -274.3233}
+  m_SizeDelta: {x: -100, y: -274.3233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414514085
 MonoBehaviour:
@@ -5238,7 +5238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: description
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30f512d06f582cc4d822e417e6a86dbc, type: 2}
   m_sharedMaterial: {fileID: 1985244856136662555, guid: 30f512d06f582cc4d822e417e6a86dbc, type: 2}
@@ -22554,6 +22554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206761113}
     m_Modifications:
+    - target: {fileID: 517424161615406316, guid: 17398190106b7ca45ac8cd6c82813044, type: 3}
+      propertyPath: statOverrides.Array.data[3].overrideValue
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4040588259465903802, guid: 17398190106b7ca45ac8cd6c82813044, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -23404,11 +23408,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 36a0e40c2ceed1f4a8153be21d3aecfc, type: 3}
   - {fileID: 21300000, guid: b18e01a014bef0f45a590b31e80dfc76, type: 3}
   descriptionTexts:
-  - "\uACF5\uACA9\uB825\uC744 10% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  - "\uACF5\uACA9\uC18D\uB3C4\uB97C 10% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  - "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960\uC744 5% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  - "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0\uB97C 25% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  - "\uCD5C\uB300 \uCCB4\uB825\uC744 25 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - "\uACF5\uACA9\uB825\uC744 20% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - "\uACF5\uACA9\uC18D\uB3C4\uB97C 8% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960\uC744 7% \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0\uB97C\\n0.5\uBC30 \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - "\uCCB4\uB825\uC744 25 \uD68C\uBCF5\uD558\uACE0\\n10\uC758 \uCD5C\uB300\uCCB4\uB825\uC744
+    \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
   activeDescriptionTexts:
   - "\uC2A4\uD0AC\uC758 \uBC94\uC704\uB97C 0.5\uB9CC\uD07C \uB298\uB9BD\uB2C8\uB2E4."
   - "\uC2A4\uD0AC\uC758 \uB370\uBBF8\uC9C0\uB97C 5\uB9CC\uD07C \uB298\uB9BD\uB2C8\uB2E4."
@@ -24458,7 +24463,7 @@ Transform:
   m_GameObject: {fileID: 1131464953}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26986,6 +26991,7 @@ MonoBehaviour:
   _particle: {fileID: 3197311784810279267}
   bulletPrefab: {fileID: 2913601662547056907, guid: aa2fcd600ca3c1c45a3a933e164a3e28, type: 3}
   atkSpeedStat: {fileID: 11400000, guid: be4af1af3f10537408d539b0bb5aa00a, type: 2}
+  bulletPool: {fileID: 11400000, guid: 5dc323eee40647640844cdae71f4be44, type: 2}
 --- !u!1 &1303517519
 GameObject:
   m_ObjectHideFlags: 0
@@ -28007,7 +28013,7 @@ MonoBehaviour:
   smokeParticle: {fileID: 11400000, guid: 43d817d3742661643bd92f67fe98be48, type: 2}
   crackParticle: {fileID: 11400000, guid: a1585bb81f56ab84d81d5685ecb6cfc7, type: 2}
   radius: 4
-  damage: 50
+  damage: 40
   cooldownTime1: 1
   bombPrefab: {fileID: 11400000, guid: dac286146c1e94d46b7e68166f5892c1, type: 2}
   bombSpawnRange: 7
@@ -29166,7 +29172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1475809529
 RectTransform:
   m_ObjectHideFlags: 0

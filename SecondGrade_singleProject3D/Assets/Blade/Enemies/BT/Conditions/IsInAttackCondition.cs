@@ -14,6 +14,6 @@ public partial class IsInAttackCondition : Condition
     public override bool IsTrue()
     {
         float distance = Vector3.Distance(Target.Value.position, Self.Value.transform.position);
-        return distance < Self.Value.attackRange; // Ž�� �Ÿ����� �ִ°�?
+        return distance < Self.Value.attackRange - 0.5f; // Ž�� �Ÿ����� �ִ°�?
     }
 }

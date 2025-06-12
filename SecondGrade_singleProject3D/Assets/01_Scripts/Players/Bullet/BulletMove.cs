@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using _01_Scripts.Combat;
+using _01_Scripts.Effect;
 using _01_Scripts.Enemy;
+using KJYLib.ObjectPool.RunTime;
 using Unity.VisualScripting;
 using UnityEngine;
+using IPoolable = KJYLib.ObjectPool.RunTime.IPoolable;
 
 namespace _01_Scripts.Players.Bullet
 {
-    public class BulletMove : MonoBehaviour
+    public class BulletMove : MonoBehaviour, IPoolable
     {
         [SerializeField] private LayerMask _layer;
         [SerializeField] private float speed = 15f;
+        [field : SerializeField] public PoolItemSO PoolItem { get; set; }
+        public GameObject GameObject => gameObject;
 
         public float Damage { get; set; }
         
+        private Pool _pool;
+
         private void Start()
         {
             StartCoroutine(BulletLifeTime());
@@ -21,7 +28,7 @@ namespace _01_Scripts.Players.Bullet
         private IEnumerator BulletLifeTime()
         {
             yield return new WaitForSeconds(3f);
-            Destroy(gameObject);
+            _pool.Push(this);
         }
 
         private void FixedUpdate()
@@ -38,8 +45,19 @@ namespace _01_Scripts.Players.Bullet
                 if (text != null)
                     text.DamageText(Damage);
                 health.ApplyDamage(Damage);
-                Destroy(gameObject);
+                _pool.Push(this);
             }
+        }
+
+        
+        public void SetUpPool(Pool pool)
+        {
+            _pool = pool;
+        }
+
+        public void ResetItem()
+        {
+            
         }
     }
 }

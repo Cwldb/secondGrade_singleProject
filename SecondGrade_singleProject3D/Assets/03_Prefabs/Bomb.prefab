@@ -4687,7 +4687,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
-  radius: 3
+  radius: 2
   damage: 100
   particle: {fileID: 11400000, guid: 2470d878ebecebe418e99c516bfb9b78, type: 2}
 --- !u!1 &5484286575416878464

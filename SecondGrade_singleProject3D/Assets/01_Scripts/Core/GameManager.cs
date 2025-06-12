@@ -17,7 +17,7 @@ namespace _01_Scripts.Core
         public float enemySpawnDelay;
         
         private int _enemyCount;
-        private int _curLevel = 1;
+        private int _curLevel = 0;
 
         public int GetCurNeedLevel() => startLevelCount - _enemyCount;
         public int GetCurLevel() => _curLevel;

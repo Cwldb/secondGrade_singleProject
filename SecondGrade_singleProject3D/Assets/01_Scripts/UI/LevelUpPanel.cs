@@ -55,7 +55,7 @@ namespace _01_Scripts.UI
                 { "CritPower", () => _playerStat.CritPower += 0.5f },
                 { "Health", () =>
                     {
-                        _playerStat._healthCompo.maxHealth += 25;
+                        _playerStat._healthCompo.maxHealth += 10;
                         _playerStat._healthCompo.currentHealth += 25;
                         _entity.OnHitEvent.Invoke();
                     }

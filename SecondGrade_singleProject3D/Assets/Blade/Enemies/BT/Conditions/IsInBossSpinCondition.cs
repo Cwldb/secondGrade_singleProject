@@ -13,6 +13,6 @@ public partial class IsInBossSpinCondition : Condition
     public override bool IsTrue()
     {
         float distance = Vector3.Distance(Target.Value.position, Self.Value.transform.position);
-        return distance < Self.Value.jumpRange;
+        return distance < Self.Value.jumpRange - 1;
     }
 }

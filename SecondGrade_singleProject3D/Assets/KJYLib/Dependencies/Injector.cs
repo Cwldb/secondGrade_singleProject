@@ -2,96 +2,124 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace KJYLib.Dependencies
 {
-    [DefaultExecutionOrder(-10)] //가장 빨리 실행되게
+    [DefaultExecutionOrder(-10)] //0이 일반 스크립트
     public class Injector : MonoBehaviour
     {
-        private const BindingFlags _bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        private const BindingFlags _BindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        private static Injector _instance;
+        
         private readonly Dictionary<Type, object> _registry = new Dictionary<Type, object>();
 
         private void Awake()
         {
-            //인터페이스를 구현한 모든 녀석을 가져와서 Provide어트리뷰트가 있을 경우 딕셔너리에 넣는다.
-            IEnumerable<IDependencyProvider> providers = GetMonoBehaviours().OfType<IDependencyProvider>();
-            foreach (var provider in providers)
+            _instance = this;
+            IEnumerable<IDependencyProvider> providers = FindMonoBehaviours().OfType<IDependencyProvider>();
+            foreach (IDependencyProvider pro in providers)
             {
-                RegisterProvider(provider);
+                RegisterProvider(pro);
             }
             
-            IEnumerable<MonoBehaviour> injectables = GetMonoBehaviours().Where(IsInjectable);
-            foreach (var injectable in injectables)
+            IEnumerable<MonoBehaviour> injectables = FindMonoBehaviours().Where(IsInjectable);
+            foreach (var mono in injectables)
             {
-                Inject(injectable);
+                Inject(mono);
             }
         }
 
-        private void Inject(MonoBehaviour injectableMono)
+        private void Inject(MonoBehaviour mono)
         {
-            Type type = injectableMono.GetType();
-            IEnumerable<FieldInfo> injectableFields = type.GetFields(_bindingFlags)
-                                .Where(field => Attribute.IsDefined(field, typeof(InjectAttribute)));
+            Type type = mono.GetType();
+            
+            IEnumerable<FieldInfo> injectableFields = type.GetFields(_BindingFlags)
+                .Where(f => Attribute.IsDefined(f, typeof(InjectAttribute)));
 
-            foreach (FieldInfo field in injectableFields)
+            foreach (var field in injectableFields)
             {
                 Type fieldType = field.FieldType;
-                object instance = Resolve(fieldType);
-                Debug.Assert(instance != null, $"Inject instance not found for {fieldType.Name}");
-                field.SetValue(injectableMono, instance);
+                object instance = ResolveType(fieldType);
+                Debug.Assert(instance != null, $"Inject instance not found in registry : {fieldType.Name}");
+                
+                field.SetValue(mono, instance);
             }
             
-            IEnumerable<MethodInfo> injectableMethods = type.GetMethods(_bindingFlags)
-                .Where(field => Attribute.IsDefined(field, typeof(InjectAttribute)));
+            IEnumerable<MethodInfo> injectableMethods = type.GetMethods(_BindingFlags)
+                .Where(f => Attribute.IsDefined(f, typeof(InjectAttribute)));
 
             foreach (var method in injectableMethods)
             {
-                Type[] requiredParams = method.GetParameters().Select(p => p.ParameterType).ToArray();
-                object[] paramValues = requiredParams.Select(Resolve).ToArray();
-                method.Invoke(injectableMono, paramValues);
+                Type[] requireParam = method.GetParameters()
+                    .Select(p => p.ParameterType).ToArray();
+                object[] paramValues = requireParam.Select(ResolveType).ToArray();
+                method.Invoke(mono, paramValues);
             }
+            
         }
 
-        private object Resolve(Type fieldType)
+        private object ResolveType(Type type)
         {
-            _registry.TryGetValue(fieldType, out object instance);
+            _registry.TryGetValue(type, out object instance);
             return instance;
         }
 
         private bool IsInjectable(MonoBehaviour mono)
         {
-            MemberInfo[] members = mono.GetType().GetMembers(_bindingFlags);
+            MemberInfo[] members = mono.GetType().GetMembers(_BindingFlags);
             return members.Any(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
         }
 
-        private void RegisterProvider(IDependencyProvider provider)
+        private void RegisterProvider(IDependencyProvider pro)
         {
-            //클래스 그 자체에 Provide 어트리뷰트가 붙어있는 경우 별도로 찾을 필요 없이 해당 클래스를 그냥 넣는다.
-            if (Attribute.IsDefined(provider.GetType(), typeof(ProvideAttribute)))
+            if(Attribute.IsDefined(pro.GetType(), typeof(ProvideAttribute)))
             {
-                _registry.Add(provider.GetType(), provider);
+                _registry.Add(pro.GetType(), pro);
                 return;
             }
             
-            //해당 클래스에 모든 매서드를 가져온다.
-            MethodInfo[] methods = provider.GetType().GetMethods(_bindingFlags);
+            MethodInfo[] methods = pro.GetType().GetMethods(_BindingFlags);
+
             foreach (var method in methods)
             {
-                //해당 매서드에 Provide어트리뷰트가 없다면 무시해도 된다.
                 if(!Attribute.IsDefined(method, typeof(ProvideAttribute))) continue;
-                Type returnType = method.ReturnType;
-                object instance = method.Invoke(provider, null);
-                Debug.Assert(instance != null, $"Provided method {method.Name} returned null.");
                 
-                _registry.Add(returnType, instance);
+                Type returnType = method.ReturnType;
+                object returnInstance = method.Invoke(pro, null);
+                Debug.Assert(returnInstance != null, $"Provide method return void {method.Name}");
+                
+                _registry.Add(returnType, returnInstance);
             }
         }
 
-        private IEnumerable<MonoBehaviour> GetMonoBehaviours()
+        private IEnumerable<MonoBehaviour> FindMonoBehaviours()
         {
             return FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        }
+        
+        public static void InjectTo(object target)
+        {
+            _instance?.InjectInternal(target);
+        }
+        
+        private void InjectInternal(object obj)
+        {
+            Type type = obj.GetType();
+            var fields = type.GetFields(_BindingFlags).Where(f => Attribute.IsDefined(f, typeof(InjectAttribute)));
+            foreach (var field in fields)
+            {
+                var value = ResolveType(field.FieldType);
+                Debug.Assert(value != null, $"Inject instance not found in registry : {field.FieldType.Name}");
+                field.SetValue(obj, value);
+            }
+
+            var methods = type.GetMethods(_BindingFlags).Where(m => Attribute.IsDefined(m, typeof(InjectAttribute)));
+            foreach (var method in methods)
+            {
+                var parameters = method.GetParameters().Select(p => ResolveType(p.ParameterType)).ToArray();
+                method.Invoke(obj, parameters);
+            }
         }
     }
 }

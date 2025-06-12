@@ -13,6 +13,6 @@ public partial class IsInBossMeleeCondition : Condition
     public override bool IsTrue()
     {
         float distance = Vector3.Distance(Target.Value.position, Self.Value.transform.position);
-        return distance < Self.Value.meleeRange;
+        return distance < Self.Value.meleeRange - 1;
     }
 }
