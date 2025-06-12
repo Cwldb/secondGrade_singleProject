@@ -49,10 +49,10 @@ namespace _01_Scripts.UI
             
             _statIncreases = new Dictionary<string, Action>
             {
-                { "Damage", () => _playerStat.Damage *= 1.15f },
-                { "AttackSpeed", () => _playerStat.AttackSpeed += -0.1f },
-                { "CritPer", () => _playerStat.CritPer += 0.05f },
-                { "CritPower", () => _playerStat.CritPower += 0.25f },
+                { "Damage", () => _playerStat.Damage *= 1.2f },
+                { "AttackSpeed", () => _playerStat.AttackSpeed += -0.08f },
+                { "CritPer", () => _playerStat.CritPer += 0.07f },
+                { "CritPower", () => _playerStat.CritPower += 0.5f },
                 { "Health", () =>
                     {
                         _playerStat._healthCompo.maxHealth += 25;

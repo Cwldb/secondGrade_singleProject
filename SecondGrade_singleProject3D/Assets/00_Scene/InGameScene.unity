@@ -28916,11 +28916,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a511f2514f804e758602e2a427bc2736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyItems:
-  - {fileID: 11400000, guid: cfc4c02a6d82df041a430af3494fe611, type: 2}
-  - {fileID: 11400000, guid: 371be44946b7c004f887abf2c83fdc12, type: 2}
-  - {fileID: 11400000, guid: 3e6b2c24b59052b4585915c5daca2e6e, type: 2}
-  - {fileID: 11400000, guid: 739f7ea8284f6fd44bc1267ad0233f1c, type: 2}
+  spawnableEnemies:
+  - enemy: {fileID: 11400000, guid: cfc4c02a6d82df041a430af3494fe611, type: 2}
+    probability: 0.4
+  - enemy: {fileID: 11400000, guid: 371be44946b7c004f887abf2c83fdc12, type: 2}
+    probability: 0.31
+  - enemy: {fileID: 11400000, guid: 3e6b2c24b59052b4585915c5daca2e6e, type: 2}
+    probability: 0.27
+  - enemy: {fileID: 11400000, guid: 739f7ea8284f6fd44bc1267ad0233f1c, type: 2}
+    probability: 0.02
   xMin: -50
   xMax: 50
   zMin: -50

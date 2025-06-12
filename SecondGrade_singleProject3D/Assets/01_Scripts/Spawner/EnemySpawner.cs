@@ -11,7 +11,14 @@ namespace _01_Scripts.Spawner
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private List<PoolItemSO> EnemyItems = new List<PoolItemSO>();
+        [System.Serializable]
+        public class SpawnableEnemy
+        {
+            public PoolItemSO enemy;
+            [Range(0f, 1f)] public float probability;
+        }
+
+        [SerializeField] private List<SpawnableEnemy> spawnableEnemies = new List<SpawnableEnemy>();
         private List<Transform> enemySpawnPos = new List<Transform>();
 
         [SerializeField] private float xMin = -10f;
@@ -20,11 +27,12 @@ namespace _01_Scripts.Spawner
         [SerializeField] private float zMax = 10f;
         
         [Inject] private PoolManagerMono _poolManagerMono;
-
+        
         private void Start()
         {
             foreach (Transform trm in transform)
                 enemySpawnPos.Add(trm);
+
             StartCoroutine(SpawnEnemy());
         }
 
@@ -33,8 +41,12 @@ namespace _01_Scripts.Spawner
             Transform spawnPoint = GetValidSpawnPoint();
             if (spawnPoint != null)
             {
-                EnemySoldiers enemy = _poolManagerMono.Pop<EnemySoldiers>(EnemyItems[Random.Range(0, EnemyItems.Count)]);
-                enemy.transform.position = spawnPoint.position;
+                PoolItemSO selectedEnemy = GetEnemyByProbability();
+                if (selectedEnemy != null)
+                {
+                    EnemySoldiers enemy = _poolManagerMono.Pop<EnemySoldiers>(selectedEnemy);
+                    enemy.transform.position = spawnPoint.position;
+                }
             }
 
             yield return new WaitForSeconds(GameManager.Instance.enemySpawnDelay);
@@ -54,6 +66,22 @@ namespace _01_Scripts.Spawner
                 return null;
 
             return validSpawnPoints[Random.Range(0, validSpawnPoints.Count)];
+        }
+
+        private PoolItemSO GetEnemyByProbability()
+        {
+            float total = spawnableEnemies.Sum(e => e.probability);
+            float random = Random.Range(0f, total);
+
+            float cumulative = 0f;
+            foreach (var data in spawnableEnemies)
+            {
+                cumulative += data.probability;
+                if (random <= cumulative)
+                    return data.enemy;
+            }
+
+            return null;
         }
     }
 }
