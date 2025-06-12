@@ -36,13 +36,7 @@ namespace _01_Work.JY._01_Scripts.Manager
                     _soundBgmDic.Add(sound.soundName, sound);
             }
         
-            PlayBGM("DEFAULT");
-        }
-
-        private void Update()
-        {
-            if(Keyboard.current.digit1Key.wasPressedThisFrame)
-                PlaySfx("CASTLE_CLICK");
+            PlayBGM("BGM");
         }
 
         public void PlaySfx(string key)

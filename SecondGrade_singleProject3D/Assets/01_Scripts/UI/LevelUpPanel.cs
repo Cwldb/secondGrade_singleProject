@@ -181,7 +181,7 @@ namespace _01_Scripts.UI
         {
             activeLevelUpPanel.transform.GetChild(0).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
-                _playerSkillSet.radius += 0.5f;
+                _playerSkillSet.radius += 1f;
                 DisableActivePanels();
             });
         }
@@ -190,7 +190,7 @@ namespace _01_Scripts.UI
         {
             activeLevelUpPanel.transform.GetChild(1).transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f).SetUpdate(true).OnComplete(() =>
             {
-                _playerSkillSet.damage += 5f;
+                _playerSkillSet.damage += 10f;
                 DisableActivePanels();
             });
         }

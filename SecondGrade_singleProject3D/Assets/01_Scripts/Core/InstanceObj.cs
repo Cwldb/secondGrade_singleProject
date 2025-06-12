@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class InstanceObj : MonoBehaviour
+namespace _01_Scripts.Core
 {
-    public static InstanceObj instance;
-
-    private void Awake()
+    public class InstanceObj : MonoBehaviour
     {
-        if (instance == null)
+        public static InstanceObj instance;
+
+        private void Awake()
         {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
