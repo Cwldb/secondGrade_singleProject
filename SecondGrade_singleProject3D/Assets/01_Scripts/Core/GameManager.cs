@@ -27,7 +27,7 @@ namespace _01_Scripts.Core
             _enemyCount++;
             if (_enemyCount == startLevelCount)
             {
-                if (_enemyCount % 3 == 0)
+                if (_enemyCount % 4 == 0)
                 {
                     OnActiveLevelUp?.Invoke();
                 }

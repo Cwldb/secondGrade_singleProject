@@ -17,8 +17,8 @@ namespace _01_Scripts.CameraScript
 
         public void Shake()
         {
-            virtualCamera.AmplitudeGain = 3;
-            virtualCamera.FrequencyGain = 3;
+            virtualCamera.AmplitudeGain = 5;
+            virtualCamera.FrequencyGain = 5;
             StartCoroutine(EndShake());
         }
 
@@ -45,7 +45,7 @@ namespace _01_Scripts.CameraScript
         
         private IEnumerator EndActiveShake()
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
             virtualCamera.AmplitudeGain = 0;
             virtualCamera.FrequencyGain = 0;
         }
