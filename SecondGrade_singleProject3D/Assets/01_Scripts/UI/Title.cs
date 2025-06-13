@@ -14,7 +14,7 @@ namespace _01_Scripts.UI
         {
             fadeImage.gameObject.SetActive(true);
             fadeImage.DOFade(1, fadeDuration)
-                .OnComplete(() => { SceneManager.LoadScene("InGameScene"); });
+                .OnComplete(() => SceneManager.LoadScene("InGameScene"));
         }
     }
 }

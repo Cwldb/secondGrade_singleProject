@@ -55,8 +55,8 @@ namespace _01_Scripts.UI
                 { "CritPower", () => _playerStat.CritPower += 0.5f },
                 { "Health", () =>
                     {
-                        _playerStat._healthCompo.maxHealth += 10;
-                        _playerStat._healthCompo.currentHealth += 25;
+                        _playerStat._healthCompo.AddMaxHealth(10f);
+                        _playerStat._healthCompo.AddCurrentHealth(25f);
                         _entity.OnHitEvent.Invoke();
                     }
                 }
@@ -111,8 +111,8 @@ namespace _01_Scripts.UI
             seq.SetUpdate(true);
             Time.timeScale = 0;
             
-            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.3f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.3f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(480, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(480, 0.3f));
             seq.Play();
         }
         
@@ -155,9 +155,9 @@ namespace _01_Scripts.UI
             seq.SetUpdate(true);
             Time.timeScale = 0;
             
-            seq.Append(trm.GetChild(0).transform.DOMoveY(540, 0.3f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(540, 0.3f));
-            seq.Append(trm.GetChild(2).transform.DOMoveY(540, 0.3f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(480, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(480, 0.3f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(480, 0.3f));
             seq.Play();
         }
 

@@ -20,6 +20,18 @@ namespace _01_Scripts.Combat
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
+        public void AddCurrentHealth(float amount)
+        {
+            currentHealth += amount;
+            if (currentHealth >= maxHealth)
+                currentHealth = maxHealth;
+        }
+
+        public void AddMaxHealth(float amount)
+        {
+            maxHealth += amount;
+        }
+
         public void AfterInitialize()
         {
             currentHealth = maxHealth = _statCompo.SubscribeStat(hpStat, HandleMaxHpChange, 10f);
