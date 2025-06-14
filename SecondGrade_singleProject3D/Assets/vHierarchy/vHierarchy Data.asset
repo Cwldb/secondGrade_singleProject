@@ -27,4 +27,3 @@ MonoBehaviour:
   bookmarkedScenePaths:
   - Assets/00_Scene/InGameScene.unity
   - Assets/00_Scene/Title.unity
-  - Assets/00_Scene/GameOverScene.unity

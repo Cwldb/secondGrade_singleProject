@@ -52,28 +52,30 @@ namespace _01_Scripts.UI
 
         public void OpenSettingPanel()
         {
+            Time.timeScale = 0f;
             onSettingPanel = true;
             settingPanel.SetActive(true);
             clickBlockPanel.SetActive(true);
-            settingPanel.transform.DOMoveX(250, 0.2f);
+            settingPanel.transform.DOMoveX(250, 0.2f).SetUpdate(true);
         }
 
         public void OpendetailsSetting()
         {
             ondetailsUI = true;
             detailsPanel.SetActive(true);
-            detailsPanel.transform.DOMoveX(425, 0.2f);
+            detailsPanel.transform.DOMoveX(425, 0.2f).SetUpdate(true);
         }
 
         public void CloseSettingPanel()
         {
+            Time.timeScale = 1f;
             onSettingPanel = false;
             settingPanel.transform.DOMoveX(_settingOldPos.x,0.2f)
                 .OnComplete(() =>
                 {
                     settingPanel.SetActive(false); 
                     clickBlockPanel.SetActive(false);
-                });
+                }).SetUpdate(true);
         }
 
         public void ClosedetailsSetting()
@@ -83,7 +85,7 @@ namespace _01_Scripts.UI
                 .OnComplete(() =>
                 {
                     detailsPanel.SetActive(false);
-                });
+                }).SetUpdate(true);
         }
     }
 }

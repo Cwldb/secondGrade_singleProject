@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4046224061141333967, guid: a6ebf1530de3f5848bd338993d7412f7, type: 3}
       propertyPath: statOverrides.Array.data[1].overrideValue
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4046224061141333967, guid: a6ebf1530de3f5848bd338993d7412f7, type: 3}
       propertyPath: statOverrides.Array.data[2].overrideValue

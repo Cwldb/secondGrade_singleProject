@@ -55,8 +55,8 @@ namespace _01_Scripts.Players.States
             if (!_hasFired && _curTime >= fireTime && _curTime < resetTime)
             {
                 _playerFire.FireBullet(_detect.DamageCalc());
-                AudioManager.Instance.PlaySfx("FIRE");
                 _hasFired = true;
+                AudioManager.Instance.PlaySfx("FIRE");
             }
 
             if (_curTime >= resetTime)
