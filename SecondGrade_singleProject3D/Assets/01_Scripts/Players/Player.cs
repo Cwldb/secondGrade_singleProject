@@ -88,6 +88,7 @@ namespace _01_Scripts.Players
             _stateMachine.ChangeState("DEAD");
             PlayerInput.OnDisable();
             GameManager.Instance.OnGameOver.Invoke();
+            TimerManager.Instance.isDeath = true;
         }
 
         private void Update()

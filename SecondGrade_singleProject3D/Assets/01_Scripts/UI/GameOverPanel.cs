@@ -22,7 +22,7 @@ namespace _01_Scripts.UI
         {
             Time.timeScale = 0;
             fadeImage.gameObject.SetActive(true);
-            fadeImage.DOFade(1, 0.7f).OnComplete(() => SceneManager.LoadScene("GameOverScene"));
+            fadeImage.DOFade(1, 0.7f).SetUpdate(true).OnComplete(() => SceneManager.LoadScene("GameOverScene"));
         }
     }
 }

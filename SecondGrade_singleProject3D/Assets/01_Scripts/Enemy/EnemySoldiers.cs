@@ -7,6 +7,7 @@ using _01_Scripts.Entities;
 using _01_Scripts.Players;
 using Blade.Enemies.BT.Events;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace _01_Scripts.Enemy
@@ -19,12 +20,14 @@ namespace _01_Scripts.Enemy
         private EnemyAttackCompo _attackCompo;
         private EntityHealth _healthCompo;
         private Collider _collider;
+        private NavMeshAgent _agent;
 
         protected override void Awake()
         {
             base.Awake();
             _collider = GetComponent<Collider>();
             _healthCompo = GetComponent<EntityHealth>();
+            _agent = GetComponentInChildren<NavMeshAgent>();
         }
 
         protected override void Start()
@@ -55,6 +58,7 @@ namespace _01_Scripts.Enemy
             _healthCompo.currentHealth = _healthCompo.maxHealth;
             IsDead = false;
             _collider.enabled = true;
+            _agent.enabled = true;
             _stateChannel.SendEventMessage(EnemyState.CHASE);
         }
 

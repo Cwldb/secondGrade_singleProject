@@ -13,8 +13,8 @@ namespace _01_Scripts.Enemy
         [SerializeField] private StatSO moveSpeedStat;
         [SerializeField] private float stopOffset = 0.05f;
         [SerializeField] private float rotationSpeed = 10f;
-        
-        private Entity _entity;
+
+        public Entity Entity { get; set; }
         private EntityStat _statCompo;
 
         public bool IsArrived => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + stopOffset;
@@ -23,7 +23,7 @@ namespace _01_Scripts.Enemy
         
         public void Initialize(Entity entity)
         {
-            _entity = entity;
+            this.Entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
@@ -40,7 +40,7 @@ namespace _01_Scripts.Enemy
 
         private void OnDestroy()
         {
-            _entity.transform.DOKill();
+            Entity.transform.DOKill();
             _statCompo.UnSubscribeStat(moveSpeedStat, HandleMoveSpeedChange);
         }
 
@@ -54,14 +54,14 @@ namespace _01_Scripts.Enemy
 
         public void LookAtTarget(Vector3 target, bool isSmooth = true)
         {
-            Vector3 direction = target - _entity.transform.position;
+            Vector3 direction = target - Entity.transform.position;
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction.normalized);
 
             if (isSmooth)
-                _entity.transform.rotation = Quaternion.Slerp(_entity.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+                Entity.transform.rotation = Quaternion.Slerp(Entity.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             else
-                _entity.transform.rotation = lookRotation;
+                Entity.transform.rotation = lookRotation;
         }
 
         public void SetStop(bool isStop)

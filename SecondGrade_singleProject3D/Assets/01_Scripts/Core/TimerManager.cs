@@ -5,48 +5,63 @@ namespace _01_Scripts.Core
 {
     public class TimerManager : MonoSingleton<TimerManager>
     {
+        public Action OnMiddleBossSpawn;
+        public Action OnBossSpawn;
+        
         public float Count { get; set; }
         public int Minutes { get; set; }
+        
+        public bool isDeath { get; set; }
 
-        private bool _is1Minute;
-        private bool _is2Minute;
-        private bool _is3Minute;
-        private bool _is4Minute;
-        public bool _is5Minute { get; set; }
+        public bool is1Minute{ get; set; }
+        public bool is2Minute{ get; set; }
+        public bool is3Minute{ get; set; }
+        public bool is4Minute{ get; set; }
+        public bool is5Minute { get; set; }
+        
+        public bool isBossSpawn {get; set;}
 
         private void Update()
         {
-            Count +=  Time.deltaTime;
+            if(!isDeath)
+                Count +=  Time.deltaTime;
+            
             if (Count >= 60)
             {
                 Minutes++;
+                OnMiddleBossSpawn?.Invoke();
                 Count = 0;
             }
 
-            if (Minutes == 1 && !_is1Minute)
+            if (Minutes == 1 && !is1Minute)
             {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
-                _is1Minute = true;
+                is1Minute = true;
             }
-            else if (Minutes == 2 && !_is2Minute)
+            else if (Minutes == 2 && !is2Minute)
             {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
-                _is2Minute = true;
+                is2Minute = true;
             }
-            else if (Minutes == 3  && !_is3Minute)
+            else if (Minutes == 3  && !is3Minute)
             {
                 GameManager.Instance.enemySpawnDelay -= 0.1f;
-                _is3Minute = true;
+                is3Minute = true;
             }
-            else if (Minutes == 4 && !_is4Minute)
+            else if (Minutes == 4 && !is4Minute)
             {
                 GameManager.Instance.enemySpawnDelay -= 0.1f;
-                _is4Minute = true;
+                is4Minute = true;
             }
-            else if (Minutes == 5 && !_is5Minute)
+            else if (Minutes == 5 && !is5Minute)
             {
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
-                _is5Minute = true;
+                is5Minute = true;
+            }
+            else if (Minutes % 2 == 0 && is5Minute && !isBossSpawn)
+            {
+                OnBossSpawn?.Invoke();
+                isBossSpawn = true;
             }
 
         }

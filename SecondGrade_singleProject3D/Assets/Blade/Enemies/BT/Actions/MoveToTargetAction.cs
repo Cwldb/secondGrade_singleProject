@@ -17,7 +17,8 @@ namespace Blade.Enemies.BT.Actions
 
         protected override Status OnStart()
         {
-            Movement.Value.SetDestination(Target.Value.position);
+            if(!Movement.Value.Entity.IsDead)
+                Movement.Value.SetDestination(Target.Value.position);
             return Status.Success;
         }
     }

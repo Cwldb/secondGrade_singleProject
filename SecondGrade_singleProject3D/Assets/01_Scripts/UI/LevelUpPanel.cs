@@ -111,8 +111,8 @@ namespace _01_Scripts.UI
             seq.SetUpdate(true);
             Time.timeScale = 0;
             
-            seq.Append(trm.GetChild(0).transform.DOMoveY(480, 0.3f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(480, 0.3f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(600, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(600, 0.3f));
             seq.Play();
         }
         
@@ -155,9 +155,9 @@ namespace _01_Scripts.UI
             seq.SetUpdate(true);
             Time.timeScale = 0;
             
-            seq.Append(trm.GetChild(0).transform.DOMoveY(480, 0.3f));
-            seq.Append(trm.GetChild(1).transform.DOMoveY(480, 0.3f));
-            seq.Append(trm.GetChild(2).transform.DOMoveY(480, 0.3f));
+            seq.Append(trm.GetChild(0).transform.DOMoveY(600, 0.3f));
+            seq.Append(trm.GetChild(1).transform.DOMoveY(600, 0.3f));
+            seq.Append(trm.GetChild(2).transform.DOMoveY(600, 0.3f));
             seq.Play();
         }
 
