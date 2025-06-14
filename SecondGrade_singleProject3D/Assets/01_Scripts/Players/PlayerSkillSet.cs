@@ -5,6 +5,7 @@ using _01_Scripts.Combat;
 using _01_Scripts.Effect;
 using _01_Scripts.Entities;
 using _01_Scripts.Shelling;
+using _01_Work.JY._01_Scripts.Manager;
 using KJYLib.Dependencies;
 using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
@@ -83,6 +84,7 @@ namespace _01_Scripts.Players
 
         private async void PlayEffect()
         {
+            AudioManager.Instance.PlaySfx("ACTIVE1");
             PoolingEffect smokeEffect = _poolManager.Pop<PoolingEffect>(smokeParticle);
             PoolingEffect crackEffect = _poolManager.Pop<PoolingEffect>(crackParticle);
             smokeEffect.PlayerVFX(transform.position, Quaternion.Euler(0, Random.Range(0, 360), 0));

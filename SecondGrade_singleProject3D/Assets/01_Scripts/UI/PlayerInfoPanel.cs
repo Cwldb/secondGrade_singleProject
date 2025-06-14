@@ -38,7 +38,7 @@ namespace _01_Scripts.UI
             _entity = GameManager.Instance.PlayerFinder.Target;
             
             _playerStat.OnStatValueChanged += UpdateStat; 
-            _entity.OnHitEvent.AddListener(UpdateHealth);
+            GameManager.Instance.OnValueChange += UpdateStat;
             _playerStat.OnStatValueChanged.Invoke();
             skill1Image.fillAmount = 1;
         }

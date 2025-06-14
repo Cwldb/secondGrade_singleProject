@@ -57,7 +57,7 @@ namespace _01_Scripts.UI
                     {
                         _playerStat._healthCompo.AddMaxHealth(10f);
                         _playerStat._healthCompo.AddCurrentHealth(25f);
-                        _entity.OnHitEvent.Invoke();
+                        GameManager.Instance.OnValueChange?.Invoke();
                     }
                 }
             };

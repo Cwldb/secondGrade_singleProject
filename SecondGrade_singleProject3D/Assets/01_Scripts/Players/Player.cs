@@ -1,9 +1,10 @@
+using _01_Scripts.Core;
 using _01_Scripts.Entities;
 using _01_Scripts.FSM;
 using KJYLib.Dependencies;
 using System;
-using _01_Scripts.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _01_Scripts.Players
 {
@@ -37,8 +38,23 @@ namespace _01_Scripts.Players
             PlayerInput.OnActive2Released += HandleActive2Released;
         }
 
+        private void OnDisable()
+        {
+            PlayerInput.OnActive1Pressed -= HandleActive1Pressed;
+            PlayerInput.OnActive2Pressed -= HandleActive2Pressed;
+
+            PlayerInput.OnActive1Released -= HandleActive1Released;
+            PlayerInput.OnActive2Released -= HandleActive2Released;
+        }
+
+        private void OnEnable()
+        {
+            PlayerInput.OnEnable();
+        }
+
         private void HandleActive1Pressed()
         {
+            Debug.Log("Active1 Pressed");
             if (!_skillSet.CanUseActive1) return;
             skillRadius.SetActive(true);
             _isActive1P = true;
@@ -47,16 +63,14 @@ namespace _01_Scripts.Players
         
         private void HandleActive2Pressed()
         {
+            Debug.Log("Active2 Pressed");
             if (!_skillSet.CanUseActive2) return;
             _isActive2P = true;
             skillRadius.SetActive(true);
             skillRadius.transform.localScale = new Vector3(_skillSet.bombSpawnRange * 2, 0.1f, _skillSet.bombSpawnRange * 2);
         }
 
-        private void OnDisable()
-        {
-            PlayerInput.OnActive1Pressed -= HandleActive1Released;
-        }
+        
 
         private void HandleActive1Released()
         {
@@ -85,10 +99,9 @@ namespace _01_Scripts.Players
 
         private void HandleDeadEvent()
         {
-            _stateMachine.ChangeState("DEAD");
+            //_stateMachine.ChangeState("DEAD");
             PlayerInput.OnDisable();
             GameManager.Instance.OnGameOver.Invoke();
-            TimerManager.Instance.isDeath = true;
         }
 
         private void Update()

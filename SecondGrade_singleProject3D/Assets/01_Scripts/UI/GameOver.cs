@@ -21,38 +21,20 @@ namespace _01_Scripts.UI
             SceneManager.sceneLoaded += HandleGameEnd;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             SceneManager.sceneLoaded -= HandleGameEnd;
         }
 
         private void HandleGameEnd(Scene arg0, LoadSceneMode arg1)
         {
-            Debug.Log("Game Over");
-            descriptionText.text = $"{TimerManager.Instance.Minutes} : {TimerManager.Instance.Count}";
-            
-            endText.DOFade(1, 1f)
-                .OnComplete(() =>
-                {
-                    descriptionText.DOFade(1, 0.7f).OnComplete(() =>
-                    {
-                        restartButton.gameObject.SetActive(true);
-                        exitButton.gameObject.SetActive(true);
-                    });
-                });
+            Debug.Log("Game Over!");
+            descriptionText.text = $"당신은 {TimerManager.Instance.Minutes:D2} : {Mathf.FloorToInt(TimerManager.Instance.Count):D2} 만큼 살아남았습니다!";
         }
 
-        public void Restart()
+        public void Exit()
         {
-            TimerManager.Instance.Minutes = 0;
-            TimerManager.Instance.Count = 0;
-            TimerManager.Instance.isDeath = false;
-            TimerManager.Instance.isBossSpawn = false;
-            TimerManager.Instance.is1Minute = false;
-            TimerManager.Instance.is2Minute = false;
-            TimerManager.Instance.is3Minute = false;
-            TimerManager.Instance.is4Minute = false;
-            TimerManager.Instance.is5Minute = false;
+            Application.Quit();
         }
     }
 }

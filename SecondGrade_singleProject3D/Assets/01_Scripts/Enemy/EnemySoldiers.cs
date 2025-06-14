@@ -35,10 +35,16 @@ namespace _01_Scripts.Enemy
             base.Start();
             _attackCompo = GetComponentInChildren<EnemyAttackCompo>();
             _animatorTrigger = GetComponentInChildren<EntityAnimatorTrigger>();
+            GameManager.Instance.OnGameOver += Initialize;
             
             _animatorTrigger.OnDamageCastTrigger += HandleAttackEvent;
             OnDeadEvent.AddListener(HandleDeathEvent);
             _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
+        }
+
+        private void Initialize()
+        {
+            _pool.Push(this);
         }
 
         private void HandleDeathEvent()

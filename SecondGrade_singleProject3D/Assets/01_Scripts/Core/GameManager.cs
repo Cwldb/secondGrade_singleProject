@@ -10,6 +10,7 @@ namespace _01_Scripts.Core
         public Action OnActiveLevelUp;
         public Action OnEnemyCount;
         public Action OnGameOver;
+        public Action OnValueChange;
 
         [field: SerializeField] public EntityFinderSO PlayerFinder { get; set; }
 

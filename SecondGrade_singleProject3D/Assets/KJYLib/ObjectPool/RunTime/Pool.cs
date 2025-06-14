@@ -45,6 +45,11 @@ namespace KJYLib.ObjectPool.RunTime
 
         public void Push(IPoolable item)
         {
+            if (item == null || item.GameObject == null)
+            {
+                Debug.LogWarning("Pool.Push: item 또는 item.GameObject가 null입니다.");
+                return;
+            }
             item.GameObject.SetActive(false);
             _pool.Push(item);
         }

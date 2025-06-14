@@ -3,8 +3,23 @@ using UnityEngine;
 
 namespace _01_Scripts.Core
 {
-    public class TimerManager : MonoSingleton<TimerManager>
+    public class TimerManager : MonoBehaviour
     {
+        public static TimerManager Instance;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
         public Action OnMiddleBossSpawn;
         public Action OnBossSpawn;
         

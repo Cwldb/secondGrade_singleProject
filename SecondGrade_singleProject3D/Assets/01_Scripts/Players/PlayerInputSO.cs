@@ -39,6 +39,7 @@ namespace _01_Scripts.Players
         public void OnMove(InputAction.CallbackContext context)
         {
             MovementKey = context.ReadValue<Vector2>();
+            Debug.Log("asdasdasd");
         }
 
         public void OnAttack(InputAction.CallbackContext context)

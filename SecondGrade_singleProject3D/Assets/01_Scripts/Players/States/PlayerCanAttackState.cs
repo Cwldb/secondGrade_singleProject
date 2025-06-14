@@ -1,4 +1,5 @@
 ﻿using _01_Scripts.Entities;
+using _01_Work.JY._01_Scripts.Manager;
 using UnityEngine;
 
 namespace _01_Scripts.Players.States
@@ -24,20 +25,23 @@ namespace _01_Scripts.Players.States
 
         public override void Update()
         {
-            if (_detect.Colliders.Length > 0 && !_detect.isObstacle)
+            if (_detect.Colliders != null)
             {
-                _curTime += Time.deltaTime;
-
-                if (_curTime >= _playerStat.AttackSpeed)
+                if (_detect.Colliders.Length > 0 && !_detect.isObstacle)
                 {
-                    _movement.RotateTarget();
-                    HandleAttackTiming();
+                    _curTime += Time.deltaTime;
+
+                    if (_curTime >= _playerStat.AttackSpeed)
+                    {
+                        _movement.RotateTarget();
+                        HandleAttackTiming();
+                    }
                 }
-            }
-            else
-            {
-                _hasFired = false;
-                _curTime = 0;
+                else
+                {
+                    _hasFired = false;
+                    _curTime = 0;
+                }
             }
         }
 
@@ -51,6 +55,7 @@ namespace _01_Scripts.Players.States
             if (!_hasFired && _curTime >= fireTime && _curTime < resetTime)
             {
                 _playerFire.FireBullet(_detect.DamageCalc());
+                AudioManager.Instance.PlaySfx("FIRE");
                 _hasFired = true;
             }
 

@@ -44,8 +44,14 @@
                 
                 _animatorTrigger.OnSwingDamageCastTrigger += HandleSpinAttackEvent;
                 _animatorTrigger.OnJumpingDamageCastTrigger += HandleJumpingAttackEvent;
+                GameManager.Instance.OnGameOver += Initialize;
                 OnDeadEvent.AddListener(HandleDeathEvent);
                 _stateChannel = GetBlackboardVariable<StateChange>("StateChannel").Value;
+            }
+
+            private void Initialize()
+            {
+                _pool.Push(this);
             }
 
             private void HandleDeathEvent()

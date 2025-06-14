@@ -1,3 +1,4 @@
+using System;
 using Blade.Effects;
 using KJYLib.ObjectPool.RunTime;
 using UnityEngine;
@@ -8,7 +9,19 @@ namespace _01_Scripts.Effect
     {
         [field : SerializeField] public PoolItemSO PoolItem { get; private set; }
 
-        public GameObject GameObject => gameObject;
+        // GameObject 프로퍼티에서 오브젝트가 파괴되었는지 체크하여 예외 방지
+        public GameObject GameObject
+        {
+            get
+            {
+                if (this == null || gameObject == null)
+                {
+                    Debug.LogWarning("PoolingEffect: GameObject is destroyed or missing.");
+                    return null;
+                }
+                return gameObject;
+            }
+        }
 
         private Pool _myPool;
         [SerializeField] private GameObject effectObject;

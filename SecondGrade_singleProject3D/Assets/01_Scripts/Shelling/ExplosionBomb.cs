@@ -1,6 +1,7 @@
 ﻿using _01_Scripts.CameraScript;
 using _01_Scripts.Combat;
 using _01_Scripts.Effect;
+using _01_Work.JY._01_Scripts.Manager;
 using Blade.Effects;
 using KJYLib.Dependencies;
 using KJYLib.ObjectPool.RunTime;
@@ -30,6 +31,7 @@ namespace _01_Scripts.Shelling
 
         private void Explode()
         {
+            AudioManager.Instance.PlaySfx("ACTIVE2");
             int hitCount = Physics.OverlapSphereNonAlloc(transform.position, radius, _targets, layer);
             for (int i = 0; i < hitCount; i++)
             {

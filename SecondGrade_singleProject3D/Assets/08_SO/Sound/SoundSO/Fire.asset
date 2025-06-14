@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f169d2f4acdf4d809cb2362f20040936, type: 3}
-  m_Name: DefaultBgm
+  m_Name: Fire
   m_EditorClassIdentifier: 
-  soundType: 1
-  clip: {fileID: 8300000, guid: 0260ce88bae0c8d42998eb51700405b0, type: 3}
-  soundName: BGM
+  soundType: 0
+  clip: {fileID: 8300000, guid: db70d4fe54925c546bbe18cc515beb3f, type: 3}
+  soundName: FIRE
