@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3372745ff1d6c4548a16534e6de85d4f, type: 3}
-  m_Name: Enemy1
+  m_Name: Enemy4
   m_EditorClassIdentifier: 
-  poolingName: Enemy1
-  prefab: {fileID: 9097945529001230907, guid: 0f5b5c4bd1a134740ac60035a0b1ad66, type: 3}
+  poolingName: Enemy4
+  prefab: {fileID: 5653663293231663220, guid: 219cdf4e0414a3d488ce3c85693f844c, type: 3}
   initCount: 10

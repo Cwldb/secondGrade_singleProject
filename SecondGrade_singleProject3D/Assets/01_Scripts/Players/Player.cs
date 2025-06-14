@@ -54,8 +54,8 @@ namespace _01_Scripts.Players
 
         private void HandleActive1Pressed()
         {
-            Debug.Log("Active1 Pressed");
             if (!_skillSet.CanUseActive1) return;
+            if (_isActive2P) return;
             skillRadius.SetActive(true);
             _isActive1P = true;
             skillRadius.transform.localScale = new Vector3(_skillSet.radius * 2, 0.1f, _skillSet.radius * 2);
@@ -63,14 +63,12 @@ namespace _01_Scripts.Players
         
         private void HandleActive2Pressed()
         {
-            Debug.Log("Active2 Pressed");
             if (!_skillSet.CanUseActive2) return;
+            if (_isActive1P) return;
             _isActive2P = true;
             skillRadius.SetActive(true);
             skillRadius.transform.localScale = new Vector3(_skillSet.bombSpawnRange * 2, 0.1f, _skillSet.bombSpawnRange * 2);
         }
-
-        
 
         private void HandleActive1Released()
         {
