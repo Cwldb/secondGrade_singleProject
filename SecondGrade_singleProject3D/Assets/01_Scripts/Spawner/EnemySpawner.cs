@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,15 +54,22 @@ namespace _01_Scripts.Spawner
 
         private void HandleSpawnBoss()
         {
+            Debug.Log("Boss Spawned!");   
             Transform spawnPoint = GetValidSpawnPoint();
             if (spawnPoint != null)
             {
                 EnemySoldiers enemy = _poolManagerMono.Pop<EnemySoldiers>(spawnableEnemies[4].enemy);
                 enemy.transform.position = spawnPoint.position;
             }
+            StartCoroutine(SpawnEnezmyBoss());
+        }
+
+        private IEnumerator SpawnEnezmyBoss()
+        {
+            yield return new WaitForSeconds(120);
             TimerManager.Instance.isBossSpawn = false;
         }
-        
+
         private IEnumerator SpawnEnemy()
         {
             Transform spawnPoint = GetValidSpawnPoint();

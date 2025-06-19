@@ -1,4 +1,4 @@
-﻿    using System;
+    using System;
     using System.Collections;
     using _01_Scripts.CameraScript;
     using _01_Scripts.Combat;
@@ -65,6 +65,9 @@
             private IEnumerator EnemyDying()
             {
                 yield return new WaitForSeconds(1);
+                GameManager.Instance.AddEnemyCount();
+                GameManager.Instance.AddEnemyCount();
+                GameManager.Instance.AddEnemyCount();
                 GameManager.Instance.AddEnemyCount();
                 yield return new WaitForSeconds(3f);
                 _pool.Push(this);

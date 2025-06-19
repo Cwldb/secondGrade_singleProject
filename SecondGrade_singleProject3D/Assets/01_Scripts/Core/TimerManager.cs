@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace _01_Scripts.Core
@@ -73,12 +73,11 @@ namespace _01_Scripts.Core
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
                 is5Minute = true;
             }
-            else if (Minutes % 2 == 0 && is5Minute && !isBossSpawn)
+            else if (Minutes % 2 == 0 && Minutes > 5 && !isBossSpawn)
             {
                 OnBossSpawn?.Invoke();
                 isBossSpawn = true;
             }
-
         }
     }
 }

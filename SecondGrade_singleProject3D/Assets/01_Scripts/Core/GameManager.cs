@@ -17,8 +17,8 @@ namespace _01_Scripts.Core
         public int startLevelCount;
         public float enemySpawnDelay;
         
-        private int _enemyCount;
-        private int _curLevel = 0;
+        private int _enemyCount = 0;
+        private int _curLevel = 1;
 
         public int GetCurNeedLevel() => startLevelCount - _enemyCount;
         public int GetCurLevel() => _curLevel;
@@ -28,7 +28,7 @@ namespace _01_Scripts.Core
             _enemyCount++;
             if (_enemyCount == startLevelCount)
             {
-                if (_enemyCount % 4 == 0)
+                if (_curLevel % 3 == 0)
                 {
                     OnActiveLevelUp?.Invoke();
                 }
