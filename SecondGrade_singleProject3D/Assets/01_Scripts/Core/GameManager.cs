@@ -23,9 +23,9 @@ namespace _01_Scripts.Core
         public int GetCurNeedLevel() => startLevelCount - _enemyCount;
         public int GetCurLevel() => _curLevel;
 
-        public void AddEnemyCount()
+        public void AddEnemyCount(int cnt = 1)
         {
-            _enemyCount++;
+            _enemyCount += cnt;
             if (_enemyCount == startLevelCount)
             {
                 if (_curLevel % 3 == 0)
