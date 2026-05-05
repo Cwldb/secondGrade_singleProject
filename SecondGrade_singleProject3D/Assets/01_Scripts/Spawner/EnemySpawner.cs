@@ -42,6 +42,15 @@ namespace _01_Scripts.Spawner
             StartCoroutine(SpawnEnemy());
         }
 
+        private void OnDestroy()
+        {
+            if (TimerManager.Instance == null)
+                return;
+
+            TimerManager.Instance.OnMiddleBossSpawn -= HandleSpawnMiddleBoss;
+            TimerManager.Instance.OnBossSpawn -= HandleSpawnBoss;
+        }
+
         private void HandleSpawnMiddleBoss()
         {
             Transform spawnPoint = GetValidSpawnPoint();
@@ -61,13 +70,6 @@ namespace _01_Scripts.Spawner
                 EnemySoldiers enemy = _poolManagerMono.Pop<EnemySoldiers>(spawnableEnemies[4].enemy);
                 enemy.transform.position = spawnPoint.position;
             }
-            StartCoroutine(SpawnEnezmyBoss());
-        }
-
-        private IEnumerator SpawnEnezmyBoss()
-        {
-            yield return new WaitForSeconds(120);
-            TimerManager.Instance.isBossSpawn = false;
         }
 
         private IEnumerator SpawnEnemy()

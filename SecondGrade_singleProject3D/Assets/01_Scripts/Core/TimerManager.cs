@@ -73,10 +73,10 @@ namespace _01_Scripts.Core
                 GameManager.Instance.enemySpawnDelay -= 0.2f;
                 is5Minute = true;
             }
-            else if (Minutes % 2 == 0 && Minutes > 5 && !isBossSpawn)
+            else if (Minutes >= 6 && !isBossSpawn)
             {
-                OnBossSpawn?.Invoke();
                 isBossSpawn = true;
+                OnBossSpawn?.Invoke();
             }
         }
     }
